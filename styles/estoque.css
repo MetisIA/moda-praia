@@ -50,6 +50,7 @@
   color: var(--text-muted);
   margin-bottom: 2px;
 }
+
 .stat-info strong {
   font-size: 1.4rem;
   color: var(--text);
@@ -72,10 +73,12 @@
 .search-input {
   position: relative;
   flex: 1;
+  min-width: 160px;
   max-width: 260px;
 }
 
-.search-input input {
+/* FIX: ícone de busca posicionado corretamente */
+.search-input .form-control {
   padding-left: 34px;
 }
 
@@ -85,10 +88,13 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
+  pointer-events: none;
+  line-height: 1;
 }
 
 .select-categoria {
   max-width: 160px;
+  flex-shrink: 0;
 }
 
 .checkbox-label {
@@ -105,23 +111,22 @@
   margin-left: auto;
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 /* --- Tabela --- */
 .card-table {
   padding: 0;
   overflow: hidden;
-}
-
-.table-wrap {
-  overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--border);
+  /* FIX: garante que o card ocupe toda a largura disponível */
+  width: 100%;
 }
 
 .card-table .table-wrap {
   border: none;
   border-radius: 0;
+  box-shadow: none;
+  overflow-x: auto; /* scroll horizontal em telas pequenas */
 }
 
 table {
@@ -143,6 +148,7 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   border-bottom: 1px solid var(--border);
+  white-space: nowrap; /* evita quebra nos headers */
 }
 
 td {
@@ -155,7 +161,9 @@ td {
 tr:last-child td {
   border-bottom: none;
 }
-tr:hover td {
+
+/* FIX: hover apenas nas linhas de dados (não no expander) */
+tbody tr:not(.expander-row):hover td {
   background: #fff8fb;
 }
 
@@ -167,6 +175,7 @@ tr:hover td {
 .product-name {
   font-weight: 600;
   font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .product-sub {
@@ -180,15 +189,22 @@ tr:hover td {
   border-radius: 4px;
   font-size: 0.75rem;
   color: #5a0030;
+  font-family: "Courier New", monospace;
+  white-space: nowrap;
 }
 
 /* --- Linha zerada (danger) --- */
-.row-danger {
+.row-danger td {
   background: #fff5f5;
 }
 
+/* FIX: hover não sobrescreve o fundo danger */
+.row-danger:hover td {
+  background: #ffe8e8 !important;
+}
+
 .cell-danger-border {
-  border-left: 3px solid var(--danger);
+  border-left: 3px solid var(--danger) !important;
 }
 
 .text-danger {
@@ -197,11 +213,17 @@ tr:hover td {
 
 /* --- Expander --- */
 .expander-row {
-  display: none;
+  display: none; /* JS alterna para "table-row" */
 }
 
 .expander-cell {
-  padding: 8px 16px;
+  padding: 8px 16px 12px;
+  background: transparent;
+}
+
+/* FIX: expander não pisca no hover da linha */
+.expander-row:hover td {
+  background: transparent !important;
 }
 
 .expander {
@@ -209,7 +231,6 @@ tr:hover td {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
-  margin: 4px 0 8px;
 }
 
 .expander-title {
@@ -235,6 +256,7 @@ tr:hover td {
   font-weight: 700;
   color: var(--text-muted);
   margin-bottom: 4px;
+  text-transform: uppercase;
 }
 
 .expander-size input {
@@ -245,11 +267,16 @@ tr:hover td {
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 700;
+  font-family: inherit;
+  background: var(--white);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
 }
 
 .expander-size input:focus {
   border-color: var(--primary);
-  outline: none;
+  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
 }
 
 .expander-actions {
@@ -258,12 +285,14 @@ tr:hover td {
   margin-top: 12px;
 }
 
-/* --- Print --- */
+/* ============================================================
+   PRINT
+   ============================================================ */
 @media print {
   .sidebar,
   .topbar,
   .step-progress,
-  .filters-bar,
+  .filters-card,
   .btn,
   button {
     display: none !important;
@@ -272,8 +301,13 @@ tr:hover td {
   .main {
     margin-left: 0 !important;
   }
+
   .screen {
     padding: 0 !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 
   .card {
@@ -282,16 +316,27 @@ tr:hover td {
   }
 }
 
-/* --- Responsivo --- */
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
 @media (max-width: 900px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    max-width: 100%;
   }
 
   .filters-actions {

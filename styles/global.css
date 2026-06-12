@@ -1,46 +1,72 @@
 /* ============================================================
    MODA PRAIA — Design System Global
-   Versão 1.0.0 | 2025
+   Versão 1.0.1 | 2025
    ============================================================ */
 
 /* ---------- TOKENS ---------- */
 :root {
-  --pk1: #C2185B;
-  --pk2: #E91E8C;
-  --pk3: #F48FB1;
-  --pk4: #FCE4EC;
-  --pk5: #FFF5F9;
+  --pk1: #c2185b;
+  --pk2: #e91e8c;
+  --pk3: #f48fb1;
+  --pk4: #fce4ec;
+  --pk5: #fff5f9;
 
-  --sidebar-bg: #6D1A3B;
+  --sidebar-bg: #6d1a3b;
+  --sidebar-w: 210px;
 
-  --txt:  #2D2D2D;
+  --txt: #2d2d2d;
   --txt2: #757575;
-  --brd:  #F0D0DC;
-  --white: #FFFFFF;
+  --brd: #f0d0dc;
+  --white: #ffffff;
 
-  --grn:  #2E7D32; --grn2: #E8F5E9;
-  --red:  #C62828; --red2: #FFEBEE;
-  --yel:  #F57F17; --yel2: #FFFDE7;
-  --blu:  #1565C0; --blu2: #E3F2FD;
+  --grn: #2e7d32;
+  --grn2: #e8f5e9;
+  --red: #c62828;
+  --red2: #ffebee;
+  --yel: #f57f17;
+  --yel2: #fffde7;
+  --blu: #1565c0;
+  --blu2: #e3f2fd;
+
+  /* Aliases usados no estoque.css */
+  --surface: #ffffff;
+  --border: #f0d0dc;
+  --text: #2d2d2d;
+  --text-muted: #757575;
+  --primary: #e91e8c;
+  --danger: #c62828;
 
   --radius: 10px;
-  --shadow: 0 2px 10px rgba(194,24,91,.07);
-  --sidebar-w: 210px;
+  --shadow: 0 2px 10px rgba(194, 24, 91, 0.07);
 }
 
 /* ---------- RESET ---------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html,
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
   background: var(--pk5);
   color: var(--txt);
-  display: flex;
   min-height: 100vh;
+}
+
+/* ============================================================
+   APP WRAPPER — FIX: flex container para sidebar + main
+   ============================================================ */
+.app {
+  display: flex;
+  min-height: 100vh; /* ← garante que sidebar e main ocupem toda a altura */
 }
 
 /* ============================================================
@@ -55,80 +81,99 @@ body {
   align-items: center;
   padding: 24px 0 16px;
   position: fixed;
-  top: 0; left: 0;
-  height: 100vh;
+  top: 0;
+  left: 0;
+  height: 100vh; /* ← ocupa 100% da viewport */
   z-index: 100;
+  overflow-y: auto; /* scroll se tiver muitos itens */
 }
 
-.sidebar .logo {
+/* --- Logo/Branding da sidebar --- */
+.sidebar-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 28px;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.sidebar-logo .icon {
+  font-size: 32px;
+  background: var(--pk2);
   width: 56px;
   height: 56px;
-  background: var(--pk2);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.sidebar .brand-name {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: .3px;
-}
-
-.sidebar .brand-sub {
-  font-size: 11px;
-  opacity: .65;
-  margin-bottom: 28px;
-}
-
-.sidebar nav {
-  width: 100%;
-  padding: 0 12px;
-  flex: 1;
-}
-
-.sidebar nav .nav-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: .5;
-  padding: 0 8px;
   margin-bottom: 6px;
 }
 
-.sidebar nav a {
+.sidebar-logo h1 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--white);
+}
+
+.sidebar-logo span {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+/* --- Nav da sidebar --- */
+.sidebar-nav {
+  width: 100%;
+  padding: 0 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-section {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.5;
+  padding: 0 8px;
+  margin-bottom: 6px;
+  color: var(--white);
+}
+
+.nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
   border-radius: var(--radius);
-  color: rgba(255,255,255,.75);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   font-size: 13.5px;
   font-weight: 500;
-  margin-bottom: 2px;
-  transition: background .2s, color .2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
-.sidebar nav a:hover {
-  background: rgba(255,255,255,.1);
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
   color: var(--white);
 }
 
-.sidebar nav a.active {
+.nav-item.active {
   background: var(--pk2);
   color: var(--white);
   font-weight: 700;
 }
 
-.sidebar nav a .step-badge {
+.nav-item .step-badge {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,28 +182,28 @@ body {
   flex-shrink: 0;
 }
 
-.sidebar nav a.active .step-badge {
-  background: rgba(255,255,255,.3);
+.nav-item.active .step-badge {
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.sidebar nav a.done .step-badge {
-  background: var(--grn);
-}
-
-.sidebar .sidebar-footer {
+/* --- Rodapé da sidebar --- */
+.sidebar-footer {
   font-size: 10px;
-  opacity: .4;
-  padding: 12px 0 0;
+  opacity: 0.4;
+  padding-top: 12px;
 }
 
 /* ============================================================
    MAIN CONTENT
    ============================================================ */
 .main {
-  margin-left: var(--sidebar-w);
+  margin-left: var(
+    --sidebar-w
+  ); /* empurra para não ficar atrás da sidebar fixa */
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0; /* FIX: evita overflow horizontal em flex */
 }
 
 /* ---------- TOPBAR ---------- */
@@ -172,87 +217,51 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
+  gap: 12px;
 }
 
-.topbar .page-title h1 {
+.topbar-left h2 {
   font-size: 17px;
   font-weight: 700;
   color: var(--pk1);
 }
 
-.topbar .page-title p {
+.topbar-left p {
   font-size: 12px;
   color: var(--txt2);
   margin-top: 2px;
 }
 
-.topbar .topbar-actions {
+.topbar-right {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-/* ---------- STATUS BADGE (Sistema Online) ---------- */
-.badge-online {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  color: var(--grn);
-  font-weight: 600;
-  background: var(--grn2);
-  padding: 5px 10px;
-  border-radius: 20px;
-}
-
-.badge-online::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--grn);
-  display: block;
+  flex-shrink: 0;
 }
 
 /* ============================================================
-   STEPPER
+   STEPPER (step-progress)
    ============================================================ */
-.stepper {
+.step-progress {
   display: flex;
   align-items: center;
-  gap: 0;
   background: var(--white);
   border-bottom: 1px solid var(--brd);
-  padding: 0 28px;
+  padding: 14px 28px;
+  gap: 0;
 }
 
-.stepper .step {
+.step-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 20px;
   font-size: 13px;
   color: var(--txt2);
-  position: relative;
-  flex: 1;
 }
 
-.stepper .step::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 60%;
-  height: 2px;
-  background: var(--brd);
-}
-
-.stepper .step:last-child::after { display: none; }
-
-.stepper .step .step-num {
-  width: 26px;
-  height: 26px;
+.step-circle {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--brd);
   color: var(--txt2);
@@ -264,73 +273,68 @@ body {
   flex-shrink: 0;
 }
 
-.stepper .step.active .step-num {
-  background: var(--pk2);
-  color: var(--white);
-}
-
-.stepper .step.active {
-  color: var(--pk1);
-  font-weight: 600;
-}
-
-.stepper .step.done .step-num {
+.step-circle.done {
   background: var(--grn);
   color: var(--white);
 }
 
-.stepper .step.done { color: var(--grn); }
-
-/* ============================================================
-   CARDS DE MÉTRICAS
-   ============================================================ */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding: 20px 28px;
+.step-circle.active {
+  background: var(--pk2);
+  color: var(--white);
 }
 
-.metric-card {
-  background: var(--white);
-  border: 1px solid var(--brd);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-shadow: var(--shadow);
+.step-label p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt);
+  line-height: 1.2;
 }
 
-.metric-card .metric-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.metric-card .metric-icon.pink  { background: var(--pk4); }
-.metric-card .metric-icon.green { background: var(--grn2); }
-.metric-card .metric-icon.red   { background: var(--red2); }
-.metric-card .metric-icon.yellow{ background: var(--yel2); }
-.metric-card .metric-icon.blue  { background: var(--blu2); }
-
-.metric-card .metric-label {
+.step-label span {
   font-size: 11px;
   color: var(--txt2);
-  text-transform: uppercase;
-  letter-spacing: .5px;
 }
 
-.metric-card .metric-value {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--txt);
-  line-height: 1;
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--brd);
+  margin: 0 12px;
+}
+
+.step-line.done {
+  background: var(--grn);
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.badge-success {
+  background: var(--grn2);
+  color: var(--grn);
+}
+
+.badge-primary {
+  background: var(--pk4);
+  color: var(--pk1);
+}
+
+.badge-warning {
+  background: var(--yel2);
+  color: var(--yel);
+}
+
+.badge-muted {
+  background: #f3f4f6;
+  color: #6b7280;
 }
 
 /* ============================================================
@@ -346,22 +350,61 @@ body {
   font-weight: 600;
   cursor: pointer;
   border: none;
-  transition: opacity .2s, transform .1s;
+  transition:
+    opacity 0.2s,
+    transform 0.1s;
+  white-space: nowrap;
 }
 
-.btn:hover  { opacity: .88; }
-.btn:active { transform: scale(.97); }
+.btn:hover {
+  opacity: 0.85;
+}
+.btn:active {
+  transform: scale(0.97);
+}
 
-.btn-primary  { background: var(--pk2);  color: var(--white); }
-.btn-outline  { background: transparent; color: var(--pk1); border: 1.5px solid var(--pk3); }
-.btn-danger   { background: var(--red2); color: var(--red); }
-.btn-success  { background: var(--grn2); color: var(--grn); }
-.btn-info     { background: var(--blu2); color: var(--blu); }
+.btn-primary {
+  background: var(--pk2);
+  color: var(--white);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--pk1);
+  border: 1.5px solid var(--pk3);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--txt2);
+  border: 1.5px solid var(--brd);
+}
+.btn-ghost:hover {
+  background: var(--pk5);
+  color: var(--pk1);
+  border-color: var(--pk3);
+}
+.btn-danger {
+  background: var(--red2);
+  color: var(--red);
+}
+.btn-success {
+  background: var(--grn2);
+  color: var(--grn);
+}
+
+/* Tamanhos */
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 11.5px;
+}
 
 /* ============================================================
-   INPUTS
+   INPUTS / FORM
    ============================================================ */
-.input, select.input, textarea.input {
+.form-control {
   width: 100%;
   padding: 9px 12px;
   border: 1.5px solid var(--brd);
@@ -370,25 +413,49 @@ body {
   color: var(--txt);
   background: var(--white);
   outline: none;
-  transition: border-color .2s;
+  transition: border-color 0.2s;
+  font-family: inherit;
 }
 
-.input:focus {
+.form-control:focus {
   border-color: var(--pk2);
-  box-shadow: 0 0 0 3px rgba(233,30,140,.1);
+  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
 }
 
-.input::placeholder { color: var(--txt2); opacity: .7; }
+.form-control::placeholder {
+  color: var(--txt2);
+  opacity: 0.7;
+}
+
+/* ============================================================
+   CARDS GERAIS
+   ============================================================ */
+.card {
+  background: var(--white);
+  border: 1px solid var(--brd);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+/* ============================================================
+   SCREEN (área de conteúdo scrollável)
+   ============================================================ */
+.screen {
+  flex: 1;
+  padding: 24px 28px;
+  overflow-y: auto;
+}
 
 /* ============================================================
    TABELAS
    ============================================================ */
 .table-wrap {
   background: var(--white);
-  border: 1px solid var(--brd);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
+  width: 100%; /* FIX: garante largura total */
 }
 
 table {
@@ -402,72 +469,40 @@ thead th {
   font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   padding: 11px 16px;
   text-align: left;
 }
 
 tbody tr {
   border-bottom: 1px solid var(--brd);
-  transition: background .15s;
+  transition: background 0.15s;
 }
 
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--pk5); }
+tbody tr:last-child {
+  border-bottom: none;
+}
+tbody tr:hover td {
+  background: var(--pk5);
+}
 
 tbody td {
   padding: 12px 16px;
   font-size: 13.5px;
   color: var(--txt);
-}
-
-/* ---------- Status badges inline ---------- */
-.tag {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11.5px;
-  font-weight: 700;
-}
-
-.tag-pink   { background: var(--pk4);  color: var(--pk1); }
-.tag-green  { background: var(--grn2); color: var(--grn); }
-.tag-red    { background: var(--red2); color: var(--red); }
-.tag-yellow { background: var(--yel2); color: var(--yel); }
-.tag-blue   { background: var(--blu2); color: var(--blu); }
-
-/* ============================================================
-   CARDS GERAIS
-   ============================================================ */
-.card {
-  background: var(--white);
-  border: 1px solid var(--brd);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px;
-}
-
-.card-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--pk1);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-/* ============================================================
-   CONTENT AREA
-   ============================================================ */
-.content {
-  padding: 20px 28px;
-  flex: 1;
+  vertical-align: middle;
 }
 
 /* ============================================================
    SCROLLBAR CUSTOMIZADA
    ============================================================ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--pk5); }
-::-webkit-scrollbar-thumb { background: var(--pk3); border-radius: 10px; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--pk5);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pk3);
+  border-radius: 10px;
+}
