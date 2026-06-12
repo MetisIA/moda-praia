@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moda Praia — Estoque</title>
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/mosaico.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <span class="icon">🏖️</span>
+          <h1>Moda Praia</h1>
+          <span>Sistema de Gestão</span>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-section">Etapas</div>
+          <a class="nav-item" href="cadastro.html"
+            ><div class="step-badge">1</div>
+            Cadastro de Produto</a
+          >
+          <a class="nav-item" href="upload.html"
+            ><div class="step-badge">2</div>
+            Upload de Imagens</a
+          >
+          <a class="nav-item active" href="mosaico.html"
+            ><div class="step-badge">3</div>
+            Mosaico de Fotos</a
+          >
+          <a class="nav-item" href="estoque.html"
+            ><div class="step-badge">4</div>
+            Estoque</a
+          >
+        </nav>
+        <div class="sidebar-footer">v1.0.0 · 2025</div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h2>Etapa 3 — Mosaico de Fotos</h2>
+            <p>
+              Visualize todos os produtos com grade de estoque em tempo real
+            </p>
+          </div>
+          <div class="topbar-right">
+            <span class="badge badge-success">✓ Sistema Online</span>
+            <button class="btn btn-ghost btn-sm">⚙️ Config</button>
+          </div>
+        </div>
+
+        <div class="step-progress">
+          <div class="step-item">
+            <div class="step-circle done">✓</div>
+            <div class="step-label">
+              <p>Cadastro</p>
+              <span>Produto</span>
+            </div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step-item">
+            <div class="step-circle done">✓</div>
+            <div class="step-label">
+              <p>Upload</p>
+              <span>Imagens</span>
+            </div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step-item">
+            <div class="step-circle active">3</div>
+            <div class="step-label">
+              <p>Mosaico</p>
+              <span>Visualização</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">4</div>
+            <div class="step-label">
+              <p>Estoque</p>
+              <span>Gestão</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">🖼️</div>
+              <div class="stat-info">
+                <p>Total de Fotos</p>
+                <strong>24</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">✅</div>
+              <div class="stat-info">
+                <p>Com Estoque</p>
+                <strong>18</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon red">⚠️</div>
+              <div class="stat-info">
+                <p>Zerados</p>
+                <strong>6</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange">📦</div>
+              <div class="stat-info">
+                <p>Total de Peças</p>
+                <strong>347</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card filters-card">
+            <div class="filters-bar">
+              <div class="search-input">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  class="form-control search-field"
+                  placeholder="Buscar por nome, código, estampa..."
+                />
+              </div>
+              <select class="form-control filter-select">
+                <option>Todas categorias</option>
+                <option>Biquíni</option>
+                <option>Maiô</option>
+                <option>Bermuda</option>
+              </select>
+              <label class="filter-check">
+                <input type="checkbox" /> Só zerados
+              </label>
+            </div>
+          </div>
+
+          <div class="mosaic-grid">
+            <!-- BIQ-001 -->
+            <div class="mosaic-card">
+              <div class="mosaic-img">
+                🩱
+                <div class="mosaic-grade-overlay">
+                  <div class="size-pill zero">
+                    <span class="sz">PP</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">P</span><span class="qty">3</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">M</span><span class="qty">5</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">G</span><span class="qty">2</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">GG</span><span class="qty">1</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">XGG</span><span class="qty">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mosaic-footer">
+                <div class="mosaic-info">
+                  <p>Floral Rosa</p>
+                  <span>BIQ-001</span>
+                </div>
+                <button class="btn btn-primary btn-xs">⬇️ Baixar</button>
+              </div>
+            </div>
+
+            <!-- BIQ-002 -->
+            <div class="mosaic-card">
+              <div class="mosaic-img mosaic-img--blue">
+                🩱
+                <div class="mosaic-grade-overlay">
+                  <div class="size-pill">
+                    <span class="sz">PP</span><span class="qty">2</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">P</span><span class="qty">4</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">M</span><span class="qty">6</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">G</span><span class="qty">3</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">GG</span><span class="qty">2</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">XGG</span><span class="qty">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mosaic-footer">
+                <div class="mosaic-info">
+                  <p>Listrado Azul</p>
+                  <span>BIQ-002</span>
+                </div>
+                <button class="btn btn-primary btn-xs">⬇️ Baixar</button>
+              </div>
+            </div>
+
+            <!-- MAI-002 zerado -->
+            <div class="mosaic-card mosaic-card--zero">
+              <div class="mosaic-img mosaic-img--red">
+                🩱
+                <div class="badge-zero-overlay">
+                  <span class="badge badge-danger badge-zero">ZERO</span>
+                </div>
+                <div class="mosaic-grade-overlay mosaic-grade-overlay--danger">
+                  <div class="size-pill zero">
+                    <span class="sz">PP</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">P</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">M</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">G</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">GG</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">XGG</span><span class="qty">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mosaic-footer">
+                <div class="mosaic-info">
+                  <p>Xadrez Preto</p>
+                  <span>MAI-002</span>
+                </div>
+                <button class="btn btn-primary btn-xs">⬇️ Baixar</button>
+              </div>
+            </div>
+
+            <!-- BER-001 -->
+            <div class="mosaic-card">
+              <div class="mosaic-img mosaic-img--green">
+                🩲
+                <div class="mosaic-grade-overlay">
+                  <div class="size-pill">
+                    <span class="sz">P</span><span class="qty">2</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">M</span><span class="qty">4</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">G</span><span class="qty">5</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">GG</span><span class="qty">3</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">XG</span><span class="qty">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mosaic-footer">
+                <div class="mosaic-info">
+                  <p>Ondas Coral</p>
+                  <span>BER-001</span>
+                </div>
+                <button class="btn btn-primary btn-xs">⬇️ Baixar</button>
+              </div>
+            </div>
+
+            <!-- MAI-001 -->
+            <div class="mosaic-card">
+              <div class="mosaic-img mosaic-img--purple">
+                🩱
+                <div class="mosaic-grade-overlay">
+                  <div class="size-pill">
+                    <span class="sz">PP</span><span class="qty">1</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">P</span><span class="qty">3</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">M</span><span class="qty">7</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">G</span><span class="qty">4</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">GG</span><span class="qty">2</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">XGG</span><span class="qty">1</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mosaic-footer">
+                <div class="mosaic-info">
+                  <p>Tie-Dye Verde</p>
+                  <span>MAI-001</span>
+                </div>
+                <button class="btn btn-primary btn-xs">⬇️ Baixar</button>
+              </div>
+            </div>
+
+            <!-- BIQ-003 -->
+            <div class="mosaic-card">
+              <div class="mosaic-img mosaic-img--yellow">
+                🩱
+                <div class="mosaic-grade-overlay">
+                  <div class="size-pill">
+                    <span class="sz">PP</span><span class="qty">2</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">P</span><span class="qty">5</span>
+                  </div>
+                  <div class="size-pill">
+                    <span class="sz">M</span><span class="qty">3</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">G</span><span class="qty">0</span>
+                  </div>
+                  <div class="size-pill zero">
+                    <span class="sz">GG</span><span class="qty">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mosaic-footer">
+                <div class="mosaic-info">
+                  <p>Tropical Amarelo</p>
+                  <span>BIQ-003</span>
+                </div>
+                <button class="btn btn-primary btn-xs">⬇️ Baixar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

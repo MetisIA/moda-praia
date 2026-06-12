@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moda Praia — Estoque</title>
+    <link rel="stylesheet" href="styles/global.css" />
+<link rel="stylesheet" href="styles/estoque.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <span class="icon">🏖️</span>
+          <h1>Moda Praia</h1>
+          <span>Sistema de Gestão</span>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-section">Etapas</div>
+          <a class="nav-item" href="cadastro.html"
+            ><div class="step-badge">1</div>
+            Cadastro de Produto</a
+          >
+          <a class="nav-item" href="upload.html"
+            ><div class="step-badge">2</div>
+            Upload de Imagens</a
+          >
+          <a class="nav-item" href="mosaico.html"
+            ><div class="step-badge">3</div>
+            Mosaico de Fotos</a
+          >
+          <a class="nav-item active" href="estoque.html"
+            ><div class="step-badge">4</div>
+            Estoque</a
+          >
+        </nav>
+        <div class="sidebar-footer">v1.0.0 · 2025</div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h2>Etapa 4 — Estoque</h2>
+            <p>Gerencie e atualize o estoque por tamanho de cada produto</p>
+          </div>
+          <div class="topbar-right">
+            <span class="badge badge-success">✓ Sistema Online</span>
+            <button class="btn btn-ghost btn-sm">⚙️ Config</button>
+          </div>
+        </div>
+
+        <div class="step-progress">
+          <div class="step-item">
+            <div class="step-circle done">✓</div>
+            <div class="step-label">
+              <p>Cadastro</p>
+              <span>Produto</span>
+            </div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step-item">
+            <div class="step-circle done">✓</div>
+            <div class="step-label">
+              <p>Upload</p>
+              <span>Imagens</span>
+            </div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step-item">
+            <div class="step-circle done">✓</div>
+            <div class="step-label">
+              <p>Mosaico</p>
+              <span>Visualização</span>
+            </div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step-item">
+            <div class="step-circle active">4</div>
+            <div class="step-label">
+              <p>Estoque</p>
+              <span>Gestão</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">📦</div>
+              <div class="stat-info">
+                <p>Produtos Ativos</p>
+                <strong>24</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">🔢</div>
+              <div class="stat-info">
+                <p>Total de Peças</p>
+                <strong>347</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon red">🚨</div>
+              <div class="stat-info">
+                <p>Estoque Zerado</p>
+                <strong>6</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange">🗂️</div>
+              <div class="stat-info">
+                <p>Categorias</p>
+                <strong>3</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card filters-card">
+            <div class="filters-bar">
+              <div class="search-input">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar produto..."
+                />
+              </div>
+              <select class="form-control select-categoria">
+                <option>Todas categorias</option>
+                <option>Biquíni</option>
+                <option>Maiô</option>
+                <option>Bermuda</option>
+              </select>
+              <label class="checkbox-label">
+                <input type="checkbox" /> Só zerados
+              </label>
+              <div class="filters-actions">
+                <button class="btn btn-outline btn-sm">📥 CSV</button>
+                <button class="btn btn-outline btn-sm">📄 JSON</button>
+                <button class="btn btn-primary btn-sm" onclick="window.print()">
+                  🖨️ Imprimir / Salvar PDF
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-table">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Produto</th>
+                    <th>Código</th>
+                    <th>Categoria</th>
+                    <th class="col-center">PP</th>
+                    <th class="col-center">P</th>
+                    <th class="col-center">M</th>
+                    <th class="col-center">G</th>
+                    <th class="col-center">GG</th>
+                    <th class="col-center">XGG</th>
+                    <th class="col-center">Total</th>
+                    <th class="col-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- BIQ-001 -->
+                  <tr>
+                    <td>
+                      <div class="product-name">Floral Rosa</div>
+                      <div class="product-sub">Triangular</div>
+                    </td>
+                    <td><code class="product-code">BIQ-001</code></td>
+                    <td><span class="badge badge-primary">Biquíni</span></td>
+                    <td class="col-center">0</td>
+                    <td class="col-center">3</td>
+                    <td class="col-center">5</td>
+                    <td class="col-center">2</td>
+                    <td class="col-center">1</td>
+                    <td class="col-center">0</td>
+                    <td class="col-center"><strong>11</strong></td>
+                    <td class="col-center">
+                      <button
+                        class="btn btn-ghost btn-xs"
+                        onclick="toggleExpander('exp1')"
+                      >
+                        ✏️ Editar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr id="exp1" class="expander-row">
+                    <td colspan="11" class="expander-cell">
+                      <div class="expander">
+                        <p class="expander-title">
+                          ✏️ Editando: Floral Rosa (BIQ-001)
+                        </p>
+                        <div class="expander-grid">
+                          <div class="expander-size">
+                            <label>PP</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>P</label
+                            ><input type="number" value="3" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>M</label
+                            ><input type="number" value="5" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>G</label
+                            ><input type="number" value="2" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>GG</label
+                            ><input type="number" value="1" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>XGG</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                        </div>
+                        <div class="expander-actions">
+                          <button class="btn btn-primary btn-sm">
+                            💾 Salvar
+                          </button>
+                          <button
+                            class="btn btn-ghost btn-sm"
+                            onclick="toggleExpander('exp1')"
+                          >
+                            ✕ Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- BIQ-002 -->
+                  <tr>
+                    <td>
+                      <div class="product-name">Listrado Azul</div>
+                      <div class="product-sub">Triangular</div>
+                    </td>
+                    <td><code class="product-code">BIQ-002</code></td>
+                    <td><span class="badge badge-primary">Biquíni</span></td>
+                    <td class="col-center">2</td>
+                    <td class="col-center">4</td>
+                    <td class="col-center">6</td>
+                    <td class="col-center">3</td>
+                    <td class="col-center">2</td>
+                    <td class="col-center">0</td>
+                    <td class="col-center"><strong>17</strong></td>
+                    <td class="col-center">
+                      <button
+                        class="btn btn-ghost btn-xs"
+                        onclick="toggleExpander('exp2')"
+                      >
+                        ✏️ Editar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr id="exp2" class="expander-row">
+                    <td colspan="11" class="expander-cell">
+                      <div class="expander">
+                        <p class="expander-title">
+                          ✏️ Editando: Listrado Azul (BIQ-002)
+                        </p>
+                        <div class="expander-grid">
+                          <div class="expander-size">
+                            <label>PP</label
+                            ><input type="number" value="2" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>P</label
+                            ><input type="number" value="4" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>M</label
+                            ><input type="number" value="6" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>G</label
+                            ><input type="number" value="3" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>GG</label
+                            ><input type="number" value="2" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>XGG</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                        </div>
+                        <div class="expander-actions">
+                          <button class="btn btn-primary btn-sm">
+                            💾 Salvar
+                          </button>
+                          <button
+                            class="btn btn-ghost btn-sm"
+                            onclick="toggleExpander('exp2')"
+                          >
+                            ✕ Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- MAI-001 -->
+                  <tr>
+                    <td>
+                      <div class="product-name">Tie-Dye Verde</div>
+                      <div class="product-sub">Cortininha</div>
+                    </td>
+                    <td><code class="product-code">MAI-001</code></td>
+                    <td><span class="badge badge-warning">Maiô</span></td>
+                    <td class="col-center">1</td>
+                    <td class="col-center">3</td>
+                    <td class="col-center">7</td>
+                    <td class="col-center">4</td>
+                    <td class="col-center">2</td>
+                    <td class="col-center">1</td>
+                    <td class="col-center"><strong>18</strong></td>
+                    <td class="col-center">
+                      <button
+                        class="btn btn-ghost btn-xs"
+                        onclick="toggleExpander('exp3')"
+                      >
+                        ✏️ Editar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr id="exp3" class="expander-row">
+                    <td colspan="11" class="expander-cell">
+                      <div class="expander">
+                        <p class="expander-title">
+                          ✏️ Editando: Tie-Dye Verde (MAI-001)
+                        </p>
+                        <div class="expander-grid">
+                          <div class="expander-size">
+                            <label>PP</label
+                            ><input type="number" value="1" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>P</label
+                            ><input type="number" value="3" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>M</label
+                            ><input type="number" value="7" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>G</label
+                            ><input type="number" value="4" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>GG</label
+                            ><input type="number" value="2" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>XGG</label
+                            ><input type="number" value="1" min="0" />
+                          </div>
+                        </div>
+                        <div class="expander-actions">
+                          <button class="btn btn-primary btn-sm">
+                            💾 Salvar
+                          </button>
+                          <button
+                            class="btn btn-ghost btn-sm"
+                            onclick="toggleExpander('exp3')"
+                          >
+                            ✕ Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- BER-001 -->
+                  <tr>
+                    <td>
+                      <div class="product-name">Ondas Coral</div>
+                      <div class="product-sub">Surf</div>
+                    </td>
+                    <td><code class="product-code">BER-001</code></td>
+                    <td><span class="badge badge-muted">Bermuda</span></td>
+                    <td class="col-center">—</td>
+                    <td class="col-center">2</td>
+                    <td class="col-center">4</td>
+                    <td class="col-center">5</td>
+                    <td class="col-center">3</td>
+                    <td class="col-center">—</td>
+                    <td class="col-center"><strong>14</strong></td>
+                    <td class="col-center">
+                      <button
+                        class="btn btn-ghost btn-xs"
+                        onclick="toggleExpander('exp4')"
+                      >
+                        ✏️ Editar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr id="exp4" class="expander-row">
+                    <td colspan="11" class="expander-cell">
+                      <div class="expander">
+                        <p class="expander-title">
+                          ✏️ Editando: Ondas Coral (BER-001)
+                        </p>
+                        <div class="expander-grid">
+                          <div class="expander-size">
+                            <label>P</label
+                            ><input type="number" value="2" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>M</label
+                            ><input type="number" value="4" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>G</label
+                            ><input type="number" value="5" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>GG</label
+                            ><input type="number" value="3" min="0" />
+                          </div>
+                        </div>
+                        <div class="expander-actions">
+                          <button class="btn btn-primary btn-sm">
+                            💾 Salvar
+                          </button>
+                          <button
+                            class="btn btn-ghost btn-sm"
+                            onclick="toggleExpander('exp4')"
+                          >
+                            ✕ Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- MAI-002 — Zerado -->
+                  <tr class="row-danger">
+                    <td class="cell-danger-border">
+                      <div class="product-name">Xadrez Preto</div>
+                      <div class="product-sub">Tomara que caia</div>
+                    </td>
+                    <td><code class="product-code">MAI-002</code></td>
+                    <td><span class="badge badge-warning">Maiô</span></td>
+                    <td class="col-center text-danger"><strong>0</strong></td>
+                    <td class="col-center text-danger"><strong>0</strong></td>
+                    <td class="col-center text-danger"><strong>0</strong></td>
+                    <td class="col-center text-danger"><strong>0</strong></td>
+                    <td class="col-center text-danger"><strong>0</strong></td>
+                    <td class="col-center text-danger"><strong>0</strong></td>
+                    <td class="col-center">
+                      <strong class="text-danger">0</strong>
+                    </td>
+                    <td class="col-center">
+                      <button
+                        class="btn btn-ghost btn-xs"
+                        onclick="toggleExpander('exp5')"
+                      >
+                        ✏️ Editar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr id="exp5" class="expander-row">
+                    <td colspan="11" class="expander-cell">
+                      <div class="expander">
+                        <p class="expander-title">
+                          ✏️ Editando: Xadrez Preto (MAI-002)
+                        </p>
+                        <div class="expander-grid">
+                          <div class="expander-size">
+                            <label>PP</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>P</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>M</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>G</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>GG</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                          <div class="expander-size">
+                            <label>XGG</label
+                            ><input type="number" value="0" min="0" />
+                          </div>
+                        </div>
+                        <div class="expander-actions">
+                          <button class="btn btn-primary btn-sm">
+                            💾 Salvar
+                          </button>
+                          <button
+                            class="btn btn-ghost btn-sm"
+                            onclick="toggleExpander('exp5')"
+                          >
+                            ✕ Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- /screen -->
+      </main>
+    </div>
+
+    <script>
+      function toggleExpander(id) {
+        const row = document.getElementById(id);
+        row.style.display = row.style.display === "none" ? "table-row" : "none";
+      }
+    </script>
+  </body>
+</html>

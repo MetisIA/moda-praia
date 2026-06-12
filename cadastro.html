@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moda Praia — Estoque</title>
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/cadastro.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="logo-box">🌸</div>
+          <span>Moda Praia</span>
+          <small>Sistema de Gestão</small>
+        </div>
+        <div class="sidebar-label">ETAPAS</div>
+        <nav class="sidebar-nav">
+          <a href="cadastro.html" class="nav-item active"
+            ><span class="nav-step">1</span> Cadastro de Produto</a
+          >
+          <a href="upload.html" class="nav-item"
+            ><span class="nav-step">2</span> Upload de Imagens</a
+          >
+          <a href="mosaico.html" class="nav-item"
+            ><span class="nav-step">3</span> Mosaico de Fotos</a
+          >
+          <a href="estoque.html" class="nav-item"
+            ><span class="nav-step">4</span> Estoque</a
+          >
+        </nav>
+        <div class="sidebar-footer">v1.0.0 · 2025</div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <!-- Topbar -->
+        <div class="topbar">
+          <div class="topbar-left">
+            <h1>Etapa 1 — Cadastro de Produto</h1>
+            <p>
+              Gerencie a hierarquia: Categoria → Modelo → Estampa/Cor → Coleção
+              → Grade → SKU
+            </p>
+          </div>
+          <div class="topbar-right">
+            <span class="badge-online">✓ Sistema Online</span>
+            <button class="btn-config">⚙ Config</button>
+          </div>
+        </div>
+
+        <!-- Stepper -->
+        <div class="stepper">
+          <div class="step active">
+            <div class="step-circle">1</div>
+            <div class="step-info">
+              <strong>Cadastro</strong><span>Produto</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step inactive">
+            <div class="step-circle">2</div>
+            <div class="step-info">
+              <strong>Upload</strong><span>Imagens</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step inactive">
+            <div class="step-circle">3</div>
+            <div class="step-info">
+              <strong>Mosaico</strong><span>Visualização</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step inactive">
+            <div class="step-circle">4</div>
+            <div class="step-info">
+              <strong>Estoque</strong><span>Gestão</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+          <!-- ── FORMULÁRIO ── -->
+          <div class="card">
+            <div class="card-header">
+              <h2>📋 Novo Produto</h2>
+            </div>
+            <div class="card-body">
+              <!-- CATEGORIA -->
+              <div class="form-section">
+                <div class="section-title">
+                  👗 Categoria <span class="level-badge">Nível 1</span>
+                </div>
+                <label>Nome da Categoria</label>
+                <div class="autocomplete-wrap">
+                  <input
+                    type="text"
+                    id="inputCategoria"
+                    placeholder="Ex: Biquíni, Maiô, Bermuda..."
+                    autocomplete="off"
+                    oninput="acFilter('categoria')"
+                    onfocus="acFilter('categoria')"
+                    onblur="acBlur('categoria')"
+                  />
+                  <div class="autocomplete-dropdown" id="acCategoria"></div>
+                </div>
+                <div id="tagCategoria"></div>
+              </div>
+
+              <!-- MODELO -->
+              <div class="form-section">
+                <div class="section-title">
+                  👙 Modelo <span class="level-badge">Nível 2</span>
+                </div>
+                <label>Nome do Modelo</label>
+                <div class="autocomplete-wrap">
+                  <input
+                    type="text"
+                    id="inputModelo"
+                    placeholder="Ex: Triangular, Cortininha..."
+                    autocomplete="off"
+                    oninput="acFilter('modelo')"
+                    onfocus="acFilter('modelo')"
+                    onblur="acBlur('modelo')"
+                  />
+                  <div class="autocomplete-dropdown" id="acModelo"></div>
+                </div>
+                <div id="tagModelo"></div>
+              </div>
+
+              <!-- ESTAMPA/COR -->
+              <div class="form-section">
+                <div class="section-title">
+                  🎨 Estampa / Cor <span class="level-badge">Nível 3</span>
+                </div>
+                <label>Nome da Estampa ou Cor</label>
+                <div class="autocomplete-wrap">
+                  <input
+                    type="text"
+                    id="inputEstampa"
+                    placeholder="Ex: Floral Rosa, Tie-Dye Verde..."
+                    autocomplete="off"
+                    oninput="acFilter('estampa')"
+                    onfocus="acFilter('estampa')"
+                    onblur="acBlur('estampa')"
+                  />
+                  <div class="autocomplete-dropdown" id="acEstampa"></div>
+                </div>
+                <div id="tagEstampa"></div>
+              </div>
+
+              <!-- COLEÇÃO -->
+              <div class="form-section">
+                <div class="section-title">📅 Coleção</div>
+                <label>Ano da Coleção</label>
+                <input
+                  type="number"
+                  id="inputColecao"
+                  class="input-base"
+                  placeholder="Ex: 2025"
+                  min="2000"
+                  max="2099"
+                  oninput="
+                    this.value = this.value.slice(0, 4);
+                    gerarSKU();
+                  "
+                  onfocus="this.style.borderColor = 'var(--accent)'"
+                  onblur="this.style.borderColor = 'var(--pink-border)'"
+                />
+              </div>
+
+              <!-- GRADE TAMANHOS -->
+              <div class="form-section">
+                <div class="section-title">📏 Grade de Tamanhos</div>
+                <div class="grade-btns">
+                  <button
+                    class="grade-btn"
+                    data-size="P"
+                    onclick="toggleSize(this)"
+                  >
+                    P
+                  </button>
+                  <button
+                    class="grade-btn"
+                    data-size="M"
+                    onclick="toggleSize(this)"
+                  >
+                    M
+                  </button>
+                  <button
+                    class="grade-btn"
+                    data-size="G"
+                    onclick="toggleSize(this)"
+                  >
+                    G
+                  </button>
+                  <button
+                    class="grade-btn"
+                    data-size="GG"
+                    onclick="toggleSize(this)"
+                  >
+                    GG
+                  </button>
+                  <button
+                    class="grade-btn"
+                    data-size="U"
+                    onclick="toggleSize(this)"
+                    style="min-width: 58px"
+                  >
+                    Único
+                  </button>
+                </div>
+              </div>
+
+              <!-- ESTOQUE POR TAMANHO -->
+              <div class="form-section" id="secaoEstoque" style="display: none">
+                <div class="section-title">📦 Estoque por Tamanho</div>
+                <div class="estoque-grid" id="estoqueGrid"></div>
+              </div>
+
+              <!-- SKU PREVIEW -->
+              <div class="sku-preview" id="skuPreview" style="opacity: 0.45">
+                <label>SKU Gerado</label>
+                <div class="sku-value" id="skuValue">—</div>
+              </div>
+
+              <!-- SALVAR -->
+              <button class="btn btn-primary" onclick="abrirConfirmacao()">
+                💾 Salvar Produto
+              </button>
+            </div>
+          </div>
+
+          <!-- ── PRODUTOS CADASTRADOS ── -->
+          <div class="card">
+            <div class="card-header">
+              <h2>📦 Produtos Cadastrados</h2>
+            </div>
+
+            <div class="table-toolbar">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="🔍 Buscar produto..."
+                oninput="filtrarTabela(this.value)"
+              />
+              <select
+                class="select-filter"
+                id="filtroCategoria"
+                onchange="
+                  filtrarTabela(document.querySelector('.search-input').value)
+                "
+              >
+                <option value="">Todas as categorias</option>
+                <option value="Biquíni">Biquíni</option>
+                <option value="Maiô">Maiô</option>
+                <option value="Bermuda">Bermuda</option>
+              </select>
+            </div>
+
+            <div class="info-banner">
+              ℹ️ Os menus de Modelo são dependentes da Categoria selecionada.
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Categoria</th>
+                    <th>Modelo</th>
+                    <th>Estampa</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tabelaProdutos">
+                  <tr>
+                    <td><strong>BIQ-001</strong></td>
+                    <td><span class="chip chip-pink">Biquíni</span></td>
+                    <td>Triangular</td>
+                    <td>Floral Rosa</td>
+                    <td><span class="chip chip-green">Sim</span></td>
+                    <td>
+                      <button class="action-btn">✏️</button
+                      ><button class="action-btn" onclick="openModal()">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>BIQ-002</strong></td>
+                    <td><span class="chip chip-pink">Biquíni</span></td>
+                    <td>Triangular</td>
+                    <td>Listrado Azul</td>
+                    <td><span class="chip chip-green">Sim</span></td>
+                    <td>
+                      <button class="action-btn">✏️</button
+                      ><button class="action-btn" onclick="openModal()">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>MAI-001</strong></td>
+                    <td><span class="chip chip-mauve">Maiô</span></td>
+                    <td>Cortininha</td>
+                    <td>Tie-Dye Verde</td>
+                    <td><span class="chip chip-green">Sim</span></td>
+                    <td>
+                      <button class="action-btn">✏️</button
+                      ><button class="action-btn" onclick="openModal()">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>BER-001</strong></td>
+                    <td><span class="chip chip-blue">Bermuda</span></td>
+                    <td>Surf</td>
+                    <td>Ondas Coral</td>
+                    <td><span class="chip chip-green">Sim</span></td>
+                    <td>
+                      <button class="action-btn">✏️</button
+                      ><button class="action-btn" onclick="openModal()">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>MAI-002</strong></td>
+                    <td><span class="chip chip-mauve">Maiô</span></td>
+                    <td>Tomara que caia</td>
+                    <td>Xadrez Preto</td>
+                    <td><span class="chip chip-red">Não</span></td>
+                    <td>
+                      <button class="action-btn">✏️</button
+                      ><button class="action-btn" onclick="openModal()">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span class="page-info" id="pageInfo"
+                >5 produtos cadastrados</span
+              >
+              <button class="page-btn">‹ Anterior</button>
+              <button class="page-btn current">1</button>
+              <button class="page-btn">Próximo ›</button>
+            </div>
+          </div>
+        </div>
+        <!-- /content -->
+      </main>
+    </div>
+
+    <!-- MODAL CONFIRMAÇÃO -->
+    <div class="modal-backdrop" id="modalConfirm">
+      <div class="modal">
+        <h3>✅ Confirmar Cadastro</h3>
+        <div class="confirm-grid" id="confirmGrid"></div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost btn-sm" onclick="fecharConfirmacao()">
+            ✕ Cancelar
+          </button>
+          <button
+            class="btn btn-primary btn-sm"
+            style="width: auto"
+            onclick="salvarProduto()"
+          >
+            ✔ Confirmar e Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL EXCLUSÃO -->
+    <div class="modal-backdrop" id="modalDelete">
+      <div class="modal">
+        <h3>🗑️ Confirmar Exclusão</h3>
+        <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 20px">
+          Tem certeza que deseja excluir este produto? Esta ação não pode ser
+          desfeita.
+        </p>
+        <div class="modal-actions">
+          <button class="btn btn-ghost btn-sm" onclick="closeModal()">
+            Cancelar
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="closeModal()">
+            Confirmar Exclusão
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── DADOS BASE ────────────────────────────────────────────────────────────
+      const DB = {
+        categoria: [
+          "Biquíni",
+          "Maiô",
+          "Bermuda",
+          "Saída de Praia",
+          "Canga",
+          "Sunga",
+        ],
+        modelo: [
+          "Triangular",
+          "Cortininha",
+          "Tomara que caia",
+          "Surf",
+          "Asa Delta",
+          "Hot Pants",
+        ],
+        estampa: [
+          "Floral Rosa",
+          "Listrado Azul",
+          "Tie-Dye Verde",
+          "Ondas Coral",
+          "Xadrez Preto",
+          "Tie-Dye Roxo",
+        ],
+      };
+
+      const estado = {
+        categoria: "",
+        modelo: "",
+        estampa: "",
+        tamanhos: [],
+        estoque: {},
+      };
+
+      // ── AUTOCOMPLETE ──────────────────────────────────────────────────────────
+      function acFilter(field) {
+        const input = document.getElementById("input" + cap(field));
+        const dropdown = document.getElementById("ac" + cap(field));
+        const val = input.value.trim().toLowerCase();
+        const lista = DB[field];
+        const filtrados = val
+          ? lista.filter((i) => i.toLowerCase().includes(val))
+          : lista;
+
+        let html = filtrados
+          .map(
+            (item) =>
+              `<div class="ac-item" onmousedown="acSelect('${field}','${item}')">${item}</div>`,
+          )
+          .join("");
+
+        if (val && !lista.find((i) => i.toLowerCase() === val)) {
+          const display = input.value.trim();
+          html += `<div class="ac-item create" onmousedown="acCreate('${field}','${display}')">Criar "${display}"</div>`;
+        }
+
+        dropdown.innerHTML =
+          html ||
+          `<div class="ac-item" style="color:var(--gray-400)">Nenhum resultado</div>`;
+        dropdown.classList.add("open");
+      }
+
+      function acBlur(field) {
+        setTimeout(
+          () =>
+            document.getElementById("ac" + cap(field)).classList.remove("open"),
+          150,
+        );
+      }
+
+      function acSelect(field, value) {
+        estado[field] = value;
+        document.getElementById("input" + cap(field)).value = "";
+        document.getElementById("ac" + cap(field)).classList.remove("open");
+        renderTag(field, value);
+        gerarSKU();
+      }
+
+      function acCreate(field, value) {
+        if (!DB[field].includes(value)) DB[field].push(value);
+        acSelect(field, value);
+      }
+
+      function renderTag(field, value) {
+        const bg = {
+          categoria: "#FCE4EC",
+          modelo: "#F3E5F5",
+          estampa: "#E8F5E9",
+        };
+        const txt = {
+          categoria: "#880E4F",
+          modelo: "#6A1B9A",
+          estampa: "#2E7D32",
+        };
+        document.getElementById("tag" + cap(field)).innerHTML =
+          `<div class="tag-selected" style="background:${bg[field]};color:${txt[field]}">
+      ${value}
+      <button onclick="limparCampo('${field}')" title="Remover">×</button>
+    </div>`;
+      }
+
+      function limparCampo(field) {
+        estado[field] = "";
+        document.getElementById("tag" + cap(field)).innerHTML = "";
+        gerarSKU();
+      }
+
+      function cap(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+
+      // ── GRADE TAMANHOS ────────────────────────────────────────────────────────
+      function toggleSize(btn) {
+        const size = btn.dataset.size;
+        btn.classList.toggle("active");
+        if (btn.classList.contains("active")) {
+          if (!estado.tamanhos.includes(size)) estado.tamanhos.push(size);
+        } else {
+          estado.tamanhos = estado.tamanhos.filter((s) => s !== size);
+          delete estado.estoque[size];
+        }
+        renderEstoqueGrid();
+        gerarSKU();
+      }
+
+      function renderEstoqueGrid() {
+        const sec = document.getElementById("secaoEstoque");
+        const grid = document.getElementById("estoqueGrid");
+        const order = ["P", "M", "G", "GG", "U"];
+        const sorted = [...estado.tamanhos].sort(
+          (a, b) => order.indexOf(a) - order.indexOf(b),
+        );
+
+        if (!sorted.length) {
+          sec.style.display = "none";
+          return;
+        }
+        sec.style.display = "block";
+
+        grid.innerHTML = sorted
+          .map(
+            (size) => `
+    <div class="estoque-item">
+      <label>${size === "U" ? "Único" : size}</label>
+      <input type="number" min="0" value="${estado.estoque[size] || 0}"
+        onchange="estado.estoque['${size}'] = parseInt(this.value)||0"
+        onfocus="this.style.borderColor='var(--accent)'"
+        onblur="this.style.borderColor='var(--pink-border)'">
+    </div>`,
+          )
+          .join("");
+      }
+
+      // ── SKU ───────────────────────────────────────────────────────────────────
+      function gerarSKU() {
+        const preview = document.getElementById("skuPreview");
+        const skuEl = document.getElementById("skuValue");
+        const { categoria, modelo, estampa } = estado;
+        if (!categoria && !modelo) {
+          preview.style.opacity = ".45";
+          skuEl.textContent = "—";
+          return;
+        }
+
+        const c = sigla(categoria, 3);
+        const m = sigla(modelo, 2);
+        const e = sigla(estampa, 2);
+        const ano = (document.getElementById("inputColecao").value || "")
+          .slice(-2)
+          .padStart(2, "0");
+        const seq = String(
+          document.querySelectorAll("#tabelaProdutos tr").length + 1,
+        ).padStart(3, "0");
+
+        skuEl.textContent = `${c}-${m}${e}-${ano}-${seq}`;
+        preview.style.opacity = "1";
+      }
+
+      function sigla(str, len) {
+        if (!str) return "?".repeat(len);
+        return str
+          .toUpperCase()
+          .replace(/[^A-Z]/g, "")
+          .slice(0, len)
+          .padEnd(len, "X");
+      }
+
+      // ── CONFIRMAÇÃO / SALVAR ──────────────────────────────────────────────────
+      function abrirConfirmacao() {
+        const { categoria, modelo, estampa, tamanhos, estoque } = estado;
+        const sku = document.getElementById("skuValue").textContent;
+        const ano = document.getElementById("inputColecao").value;
+
+        if (!categoria || !modelo || !estampa) {
+          alert("⚠️ Preencha Categoria, Modelo e Estampa antes de salvar.");
+          return;
+        }
+        if (!tamanhos.length) {
+          alert("⚠️ Selecione ao menos um tamanho na grade.");
+          return;
+        }
+
+        const estoqueStr = tamanhos
+          .map((t) => `${t === "U" ? "Único" : t}: ${estoque[t] || 0}`)
+          .join(" | ");
+
+        document.getElementById("confirmGrid").innerHTML = `
+    <div class="confirm-item"><label>Categoria</label><span>${categoria}</span></div>
+    <div class="confirm-item"><label>Modelo</label><span>${modelo}</span></div>
+    <div class="confirm-item"><label>Estampa / Cor</label><span>${estampa}</span></div>
+    <div class="confirm-item"><label>Coleção</label><span>${ano || "—"}</span></div>
+    <div class="confirm-item"><label>Grade</label><span>${tamanhos.map((t) => (t === "U" ? "Único" : t)).join(", ")}</span></div>
+    <div class="confirm-sku confirm-item"><label>SKU GERADO</label><span>${sku}</span></div>
+    <div class="confirm-estoque confirm-item"><label>📦 Estoque por Tamanho</label><span>${estoqueStr}</span></div>
+  `;
+        document.getElementById("modalConfirm").classList.add("open");
+      }
+
+      function fecharConfirmacao() {
+        document.getElementById("modalConfirm").classList.remove("open");
+      }
+
+      function salvarProduto() {
+        const { categoria, modelo, estampa } = estado;
+        const sku = document.getElementById("skuValue").textContent;
+        const chips = {
+          Biquíni: "chip-pink",
+          Maiô: "chip-mauve",
+          Bermuda: "chip-blue",
+        };
+        const chipClass = chips[categoria] || "chip-pink";
+
+        const tbody = document.getElementById("tabelaProdutos");
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+    <td><strong>${sku}</strong></td>
+    <td><span class="chip ${chipClass}">${categoria}</span></td>
+    <td>${modelo}</td><td>${estampa}</td>
+    <td><span class="chip chip-green">Sim</span></td>
+    <td><button class="action-btn">✏️</button><button class="action-btn" onclick="openModal()">🗑️</button></td>
+  `;
+        tbody.prepend(tr);
+
+        const total = tbody.querySelectorAll("tr").length;
+        document.getElementById("pageInfo").textContent =
+          `${total} produto${total > 1 ? "s" : ""} cadastrado${total > 1 ? "s" : ""}`;
+
+        // Reset
+        estado.categoria = "";
+        estado.modelo = "";
+        estado.estampa = "";
+        estado.tamanhos = [];
+        estado.estoque = {};
+        ["categoria", "modelo", "estampa"].forEach((f) => {
+          document.getElementById("input" + cap(f)).value = "";
+          document.getElementById("tag" + cap(f)).innerHTML = "";
+        });
+        document.getElementById("inputColecao").value = "";
+        document
+          .querySelectorAll(".grade-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById("secaoEstoque").style.display = "none";
+        document.getElementById("skuPreview").style.opacity = ".45";
+        document.getElementById("skuValue").textContent = "—";
+
+        fecharConfirmacao();
+        alert("✅ Produto salvo com sucesso!");
+      }
+
+      // ── FILTRO ────────────────────────────────────────────────────────────────
+      function filtrarTabela(termo) {
+        const cat = document
+          .getElementById("filtroCategoria")
+          .value.toLowerCase();
+        const t = termo.toLowerCase();
+        document.querySelectorAll("#tabelaProdutos tr").forEach((tr) => {
+          const txt = tr.textContent.toLowerCase();
+          tr.style.display =
+            (!t || txt.includes(t)) && (!cat || txt.includes(cat))
+              ? ""
+              : "none";
+        });
+      }
+
+      // ── MODAL EXCLUSÃO ────────────────────────────────────────────────────────
+      function openModal() {
+        document.getElementById("modalDelete").classList.add("open");
+      }
+      function closeModal() {
+        document.getElementById("modalDelete").classList.remove("open");
+      }
+    </script>
+  </body>
+</html>

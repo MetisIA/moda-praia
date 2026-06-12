@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moda Praia — Estoque</title>
+  <link rel="stylesheet" href="styles/global.css" />
+  <link rel="stylesheet" href="styles/upload.css" />
+  <body>
+    <div class="app">
+      <!-- ── SIDEBAR ── -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="logo-box">🌸</div>
+          <span class="brand">Moda Praia</span>
+          <span class="sub">Sistema de Gestão</span>
+        </div>
+        <div class="sidebar-label">ETAPAS</div>
+        <nav class="sidebar-nav">
+          <a href="cadastro.html" class="nav-item done">
+            <span class="nav-step">✓</span> Cadastro de Produto
+          </a>
+          <a href="upload.html" class="nav-item active">
+            <span class="nav-step">2</span> Upload de Imagens
+          </a>
+          <a href="mosaico.html" class="nav-item">
+            <span class="nav-step">3</span> Mosaico de Fotos
+          </a>
+          <a href="estoque.html" class="nav-item">
+            <span class="nav-step">4</span> Estoque
+          </a>
+        </nav>
+        <div class="sidebar-footer">v1.0.0 · 2025</div>
+      </aside>
+
+      <!-- ── MAIN ── -->
+      <main class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h1>Etapa 2 — Upload de Imagens</h1>
+            <p>Faça upload das fotos e vincule cada uma ao produto correto</p>
+          </div>
+          <div class="topbar-right">
+            <span class="badge-online">✓ Sistema Online</span>
+            <button class="btn-config">⚙ Config</button>
+          </div>
+        </div>
+
+        <div class="stepper">
+          <div class="step done">
+            <div class="step-circle">✓</div>
+            <div class="step-info">
+              <strong>Cadastro</strong><span>Produto</span>
+            </div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step active">
+            <div class="step-circle">2</div>
+            <div class="step-info">
+              <strong>Upload</strong><span>Imagens</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step inactive">
+            <div class="step-circle">3</div>
+            <div class="step-info">
+              <strong>Mosaico</strong><span>Visualização</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step inactive">
+            <div class="step-circle">4</div>
+            <div class="step-info">
+              <strong>Estoque</strong><span>Gestão</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <!-- COLUNA ESQUERDA -->
+          <div>
+            <!-- DROP ZONE -->
+            <div class="drop-zone" id="dropZone">
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                multiple
+                onchange="handleFiles(this.files)"
+              />
+              <div class="drop-icon">📁</div>
+              <h3>Arraste as fotos aqui ou clique para selecionar</h3>
+              <p>Aceita JPG, PNG, WEBP · Múltiplos arquivos simultâneos</p>
+              <button class="btn-select">📂 Selecionar Arquivos</button>
+            </div>
+
+            <!-- GALERIA -->
+            <div class="gallery-section" id="galSection" style="display: none">
+              <div class="gallery-label">
+                🖼️ Fotos carregadas
+                <span class="gallery-count" id="galCount">0</span>
+              </div>
+              <div class="gallery-grid" id="galGrid"></div>
+            </div>
+
+            <!-- QUEUE BAR -->
+            <div class="queue-bar">
+              <div class="queue-title">🗂️ Produtos para Vincular</div>
+              <div style="display: flex; align-items: center; gap: 8px">
+                <span class="badge-pend" id="pendBadge">3 pendentes</span>
+                <button class="btn-save-all" onclick="saveAll()">
+                  ✅ Salvar Todas
+                </button>
+              </div>
+            </div>
+            <div class="alert-warn">
+              ⚠️ A foto de <strong>Frente</strong> é a imagem principal — será
+              usada no mosaico e catálogo.
+            </div>
+
+            <!-- ══ PRODUTO 1 ══ -->
+            <div class="product-card" id="prod-1">
+              <div class="pc-top">
+                <div class="pc-name">🩱 BIQ-001 · Biquíni Triangular</div>
+                <span class="st-badge st-pending" id="st-1">⏳ Pendente</span>
+              </div>
+              <div class="pc-body">
+                <div
+                  class="photo-slot main-slot"
+                  id="slot-1-front"
+                  onclick="openPicker(1, 'front')"
+                >
+                  <span class="slot-top-label">Frente</span>
+                  <span class="crown">👑</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Foto principal</span>
+                  <button class="slot-rm" onclick="rmSlot(1, 'front', event)">
+                    ×
+                  </button>
+                </div>
+                <div
+                  class="photo-slot"
+                  id="slot-1-side"
+                  onclick="openPicker(1, 'side')"
+                >
+                  <span class="slot-top-label">Lado</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Vista lateral</span>
+                  <button class="slot-rm" onclick="rmSlot(1, 'side', event)">
+                    ×
+                  </button>
+                </div>
+                <div
+                  class="photo-slot"
+                  id="slot-1-back"
+                  onclick="openPicker(1, 'back')"
+                >
+                  <span class="slot-top-label">Costas</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Vista traseira</span>
+                  <button class="slot-rm" onclick="rmSlot(1, 'back', event)">
+                    ×
+                  </button>
+                </div>
+                <div class="pc-right">
+                  <div class="fields-row">
+                    <div class="field-group">
+                      <label>Categoria</label>
+                      <select class="field-select" onchange="updSt(1)">
+                        <option>Biquíni</option>
+                        <option>Maiô</option>
+                        <option>Bermuda</option>
+                        <option>Saída de Praia</option>
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Modelo</label>
+                      <select class="field-select" onchange="updSt(1)">
+                        <option>Triangular</option>
+                        <option>Cortininha</option>
+                        <option>Tomara que caia</option>
+                        <option>Surf</option>
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Estampa / Cor</label>
+                      <select class="field-select" onchange="updSt(1)">
+                        <option>Floral Rosa</option>
+                        <option>Listrado Azul</option>
+                        <option>Tie-Dye Verde</option>
+                        <option>Ondas Coral</option>
+                      </select>
+                    </div>
+                  </div>
+                  <hr class="pc-divider" />
+                  <div class="pc-actions">
+                    <button class="btn-del" onclick="delProd(1)">
+                      🗑️ Excluir
+                    </button>
+                    <button
+                      class="btn-save"
+                      id="sBtn-1"
+                      onclick="saveProd(1)"
+                      disabled
+                    >
+                      💾 Salvar Produto
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ PRODUTO 2 ══ -->
+            <div class="product-card" id="prod-2">
+              <div class="pc-top">
+                <div class="pc-name">🩲 BER-001 · Bermuda Surf</div>
+                <span class="st-badge st-pending" id="st-2">⏳ Pendente</span>
+              </div>
+              <div class="pc-body">
+                <div
+                  class="photo-slot main-slot"
+                  id="slot-2-front"
+                  onclick="openPicker(2, 'front')"
+                >
+                  <span class="slot-top-label">Frente</span>
+                  <span class="crown">👑</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Foto principal</span>
+                  <button class="slot-rm" onclick="rmSlot(2, 'front', event)">
+                    ×
+                  </button>
+                </div>
+                <div
+                  class="photo-slot"
+                  id="slot-2-side"
+                  onclick="openPicker(2, 'side')"
+                >
+                  <span class="slot-top-label">Lado</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Vista lateral</span>
+                  <button class="slot-rm" onclick="rmSlot(2, 'side', event)">
+                    ×
+                  </button>
+                </div>
+                <div
+                  class="photo-slot"
+                  id="slot-2-back"
+                  onclick="openPicker(2, 'back')"
+                >
+                  <span class="slot-top-label">Costas</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Vista traseira</span>
+                  <button class="slot-rm" onclick="rmSlot(2, 'back', event)">
+                    ×
+                  </button>
+                </div>
+                <div class="pc-right">
+                  <div class="fields-row">
+                    <div class="field-group">
+                      <label>Categoria</label>
+                      <select class="field-select" onchange="updSt(2)">
+                        <option>Bermuda</option>
+                        <option>Biquíni</option>
+                        <option>Maiô</option>
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Modelo</label>
+                      <select class="field-select" onchange="updSt(2)">
+                        <option>Surf</option>
+                        <option>Casual</option>
+                        <option>Jeans</option>
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Estampa / Cor</label>
+                      <select class="field-select" onchange="updSt(2)">
+                        <option>Ondas Coral</option>
+                        <option>Listrado Azul</option>
+                        <option>Tie-Dye Verde</option>
+                      </select>
+                    </div>
+                  </div>
+                  <hr class="pc-divider" />
+                  <div class="pc-actions">
+                    <button class="btn-del" onclick="delProd(2)">
+                      🗑️ Excluir
+                    </button>
+                    <button
+                      class="btn-save"
+                      id="sBtn-2"
+                      onclick="saveProd(2)"
+                      disabled
+                    >
+                      💾 Salvar Produto
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ PRODUTO 3 ══ -->
+            <div class="product-card" id="prod-3">
+              <div class="pc-top">
+                <div class="pc-name">👙 MAI-001 · Maiô Cortininha</div>
+                <span class="st-badge st-pending" id="st-3">⏳ Pendente</span>
+              </div>
+              <div class="pc-body">
+                <div
+                  class="photo-slot main-slot"
+                  id="slot-3-front"
+                  onclick="openPicker(3, 'front')"
+                >
+                  <span class="slot-top-label">Frente</span>
+                  <span class="crown">👑</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Foto principal</span>
+                  <button class="slot-rm" onclick="rmSlot(3, 'front', event)">
+                    ×
+                  </button>
+                </div>
+                <div
+                  class="photo-slot"
+                  id="slot-3-side"
+                  onclick="openPicker(3, 'side')"
+                >
+                  <span class="slot-top-label">Lado</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Vista lateral</span>
+                  <button class="slot-rm" onclick="rmSlot(3, 'side', event)">
+                    ×
+                  </button>
+                </div>
+                <div
+                  class="photo-slot"
+                  id="slot-3-back"
+                  onclick="openPicker(3, 'back')"
+                >
+                  <span class="slot-top-label">Costas</span>
+                  <span class="slot-cam">📷</span>
+                  <span class="slot-sub">Vista traseira</span>
+                  <button class="slot-rm" onclick="rmSlot(3, 'back', event)">
+                    ×
+                  </button>
+                </div>
+                <div class="pc-right">
+                  <div class="fields-row">
+                    <div class="field-group">
+                      <label>Categoria</label>
+                      <select class="field-select" onchange="updSt(3)">
+                        <option>Maiô</option>
+                        <option>Biquíni</option>
+                        <option>Bermuda</option>
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Modelo</label>
+                      <select class="field-select" onchange="updSt(3)">
+                        <option>Cortininha</option>
+                        <option>Triangular</option>
+                        <option>Tomara que caia</option>
+                      </select>
+                    </div>
+                    <div class="field-group">
+                      <label>Estampa / Cor</label>
+                      <select class="field-select" onchange="updSt(3)">
+                        <option>Tie-Dye Verde</option>
+                        <option>Floral Rosa</option>
+                        <option>Ondas Coral</option>
+                      </select>
+                    </div>
+                  </div>
+                  <hr class="pc-divider" />
+                  <div class="pc-actions">
+                    <button class="btn-del" onclick="delProd(3)">
+                      🗑️ Excluir
+                    </button>
+                    <button
+                      class="btn-save"
+                      id="sBtn-3"
+                      onclick="saveProd(3)"
+                      disabled
+                    >
+                      💾 Salvar Produto
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /left col -->
+
+          <!-- ── COLUNA DIREITA ── -->
+          <div class="side-col">
+            <div class="info-card">
+              <div class="ic-header"><h3>📊 Sessão Atual</h3></div>
+              <div class="ic-body">
+                <div class="sess-item s-loaded">
+                  <span>📁 Fotos carregadas</span
+                  ><strong id="s-loaded">0</strong>
+                </div>
+                <div class="sess-item s-done">
+                  <span>✅ Processadas</span><strong id="s-done">0</strong>
+                </div>
+                <div class="sess-item s-pending">
+                  <span>⏳ Pendentes</span><strong id="s-pend">3</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="ic-header"><h3>📸 Sobre as Fotos</h3></div>
+              <div class="ic-body">
+                <div class="legend-row">
+                  <span class="ld" style="background: var(--accent)"></span
+                  ><strong>Frente</strong> — foto principal 👑
+                </div>
+                <div class="legend-row">
+                  <span class="ld" style="background: var(--pink-mid)"></span
+                  ><strong>Lado</strong> — vista lateral
+                </div>
+                <div class="legend-row">
+                  <span class="ld" style="background: var(--pink-border)"></span
+                  ><strong>Costas</strong> — vista traseira
+                </div>
+                <div class="legend-note">
+                  Clique em qualquer slot 📷 para abrir o seletor de foto.<br />Os
+                  3 slots devem estar preenchidos para liberar o
+                  <strong>Salvar</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="ic-header"><h3>📐 Nomenclatura</h3></div>
+              <div class="ic-body">
+                <span class="rule-lbl">Formato:</span>
+                <code class="rule-code">CAT_MODELO_ESTAMPA_COD.jpg</code>
+                <span class="rule-lbl">Exemplo:</span>
+                <code class="rule-code">BIQ_TRI_FLORAL-ROSA_001.jpg</code>
+                <span class="rule-lbl">Pasta de destino:</span>
+                <code class="rule-code">/estoque/biquini/triangular/</code>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /scroll-area -->
+      </main>
+    </div>
+
+    <!-- ── MODAL SELETOR ── -->
+    <div id="pickerModal" class="picker-modal">
+      <div class="picker-inner">
+        <div class="picker-header">
+          <h3 id="pickerTitle">Selecionar foto</h3>
+          <button onclick="closePicker()" class="picker-close">×</button>
+        </div>
+        <p class="picker-hint">Clique na foto para atribuí-la ao slot.</p>
+        <div class="gallery-grid" id="pickerGrid"></div>
+        <p id="pickerEmpty" class="picker-empty">
+          Nenhuma foto carregada. Faça upload primeiro ☝️
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // ── ESTADO ────────────────────────────────────────────────────────────────
+      const photos = [];
+      const assigned = {};
+      let pickerCtx = null;
+      let savedCount = 0;
+      const TOTAL = 3;
+
+      // ── DRAG & DROP ───────────────────────────────────────────────────────────
+      const dz = document.getElementById("dropZone");
+      dz.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dz.classList.add("dragover");
+      });
+      dz.addEventListener("dragleave", () => dz.classList.remove("dragover"));
+      dz.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dz.classList.remove("dragover");
+        handleFiles(e.dataTransfer.files);
+      });
+
+      function handleFiles(files) {
+        [...files].forEach((f) => {
+          if (!f.type.startsWith("image/")) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            photos.push({
+              id: "p" + Date.now() + Math.random().toString(36).slice(2, 5),
+              name: f.name,
+              url: ev.target.result,
+            });
+            renderGallery();
+            updSession();
+          };
+          reader.readAsDataURL(f);
+        });
+      }
+
+      // ── GALERIA ───────────────────────────────────────────────────────────────
+      function renderGallery() {
+        const sec = document.getElementById("galSection");
+        const grd = document.getElementById("galGrid");
+        sec.style.display = photos.length ? "block" : "none";
+        document.getElementById("galCount").textContent = photos.length;
+        const used = Object.values(assigned);
+        grd.innerHTML = photos
+          .map(
+            (p) => `
+    <div class="gallery-thumb ${used.includes(p.id) ? "used" : ""}" title="${p.name}">
+      <img src="${p.url}" alt="">
+      ${used.includes(p.id) ? '<div class="used-tag">Em uso</div>' : ""}
+      <button class="rm-btn" onclick="removePhoto('${p.id}',event)">×</button>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function removePhoto(id, e) {
+        e.stopPropagation();
+        const i = photos.findIndex((p) => p.id === id);
+        if (i !== -1) photos.splice(i, 1);
+        Object.keys(assigned).forEach((k) => {
+          if (assigned[k] === id) {
+            const [pid, view] = k.split("-");
+            clearSlot(pid, view);
+            delete assigned[k];
+          }
+        });
+        renderGallery();
+        updAllSt();
+        updSession();
+      }
+
+      // ── PICKER ────────────────────────────────────────────────────────────────
+      function openPicker(pid, view) {
+        const el = document.getElementById(`slot-${pid}-${view}`);
+        if (el.classList.contains("filled") && !el.querySelector(".slot-rm"))
+          return;
+        pickerCtx = { pid, view };
+        const labels = {
+          front: "Frente (Principal) 👑",
+          side: "Lado",
+          back: "Costas",
+        };
+        document.getElementById("pickerTitle").textContent =
+          `Atribuir foto — ${labels[view]}`;
+        const used = Object.values(assigned);
+        const pg = document.getElementById("pickerGrid");
+        const pe = document.getElementById("pickerEmpty");
+        if (!photos.length) {
+          pg.innerHTML = "";
+          pe.style.display = "block";
+        } else {
+          pe.style.display = "none";
+          pg.innerHTML = photos
+            .map(
+              (p) => `
+      <div class="gallery-thumb" style="cursor:pointer;${used.includes(p.id) ? "border-color:var(--green)" : ""}"
+        onclick="assignPhoto('${p.id}')" title="${p.name}">
+        <img src="${p.url}" alt="">
+        ${used.includes(p.id) ? '<div class="used-tag">Em uso</div>' : ""}
+      </div>`,
+            )
+            .join("");
+        }
+        document.getElementById("pickerModal").style.display = "flex";
+      }
+      function closePicker() {
+        document.getElementById("pickerModal").style.display = "none";
+        pickerCtx = null;
+      }
+
+      function assignPhoto(id) {
+        const { pid, view } = pickerCtx;
+        assigned[`${pid}-${view}`] = id;
+        const p = photos.find((x) => x.id === id);
+        fillSlot(pid, view, p.url);
+        renderGallery();
+        updSt(pid);
+        closePicker();
+      }
+
+      // ── SLOTS UI ──────────────────────────────────────────────────────────────
+      const LABELS = { front: "Frente", side: "Lado", back: "Costas" };
+      const SUBS = {
+        front: "Foto principal",
+        side: "Vista lateral",
+        back: "Vista traseira",
+      };
+
+      function fillSlot(pid, view, url) {
+        const el = document.getElementById(`slot-${pid}-${view}`);
+        const isMain = view === "front";
+        el.classList.add("filled");
+        el.onclick = null;
+        el.innerHTML = `
+    <span class="slot-top-label">${LABELS[view]}</span>
+    ${isMain ? '<span class="crown">👑</span>' : ""}
+    <img class="slot-img" src="${url}" alt="">
+    <button class="slot-rm" onclick="rmSlot(${pid},'${view}',event)">×</button>`;
+      }
+
+      function clearSlot(pid, view) {
+        const el = document.getElementById(`slot-${pid}-${view}`);
+        if (!el) return;
+        const isMain = view === "front";
+        el.classList.remove("filled");
+        el.onclick = () => openPicker(pid, view);
+        el.innerHTML = `
+    <span class="slot-top-label">${LABELS[view]}</span>
+    ${isMain ? '<span class="crown">👑</span>' : ""}
+    <span class="slot-cam">📷</span>
+    <span class="slot-sub">${SUBS[view]}</span>
+    <button class="slot-rm" onclick="rmSlot(${pid},'${view}',event)">×</button>`;
+      }
+
+      function rmSlot(pid, view, e) {
+        e.stopPropagation();
+        delete assigned[`${pid}-${view}`];
+        clearSlot(pid, view);
+        renderGallery();
+        updSt(pid);
+      }
+
+      // ── STATUS ────────────────────────────────────────────────────────────────
+      function updSt(pid) {
+        const f = assigned[`${pid}-front`];
+        const s = assigned[`${pid}-side`];
+        const b = assigned[`${pid}-back`];
+        const badge = document.getElementById(`st-${pid}`);
+        const sBtn = document.getElementById(`sBtn-${pid}`);
+        const count = [f, s, b].filter(Boolean).length;
+
+        if (count === 3) {
+          badge.className = "st-badge st-ready";
+          badge.textContent = "✔ Pronto para salvar";
+          sBtn.disabled = false;
+        } else if (count > 0) {
+          badge.className = "st-badge st-partial";
+          badge.textContent = `📷 ${count}/3 fotos`;
+          sBtn.disabled = true;
+        } else {
+          badge.className = "st-badge st-pending";
+          badge.textContent = "⏳ Pendente";
+          sBtn.disabled = true;
+        }
+      }
+
+      function updAllSt() {
+        [1, 2, 3].forEach((id) => {
+          if (document.getElementById(`prod-${id}`)) updSt(id);
+        });
+      }
+
+      function saveProd(pid) {
+        const card = document.getElementById(`prod-${pid}`);
+        const badge = document.getElementById(`st-${pid}`);
+        const sBtn = document.getElementById(`sBtn-${pid}`);
+        badge.className = "st-badge st-saved";
+        badge.textContent = "✅ Salvo";
+        sBtn.disabled = true;
+        sBtn.textContent = "✅ Salvo";
+        card.classList.add("saved");
+        savedCount++;
+        updSession();
+      }
+
+      function delProd(pid) {
+        if (!confirm("Remover este produto da fila de upload?")) return;
+        document.getElementById(`prod-${pid}`)?.remove();
+        ["front", "side", "back"].forEach(
+          (v) => delete assigned[`${pid}-${v}`],
+        );
+        renderGallery();
+        updSession();
+      }
+
+      function saveAll() {
+        [1, 2, 3].forEach((id) => {
+          const btn = document.getElementById(`sBtn-${id}`);
+          if (btn && !btn.disabled) saveProd(id);
+        });
+      }
+
+      function updSession() {
+        document.getElementById("s-loaded").textContent = photos.length;
+        document.getElementById("s-done").textContent = savedCount;
+        const total = document.querySelectorAll(".product-card").length;
+        document.getElementById("s-pend").textContent = Math.max(
+          0,
+          total - savedCount,
+        );
+        const pb = document.getElementById("pendBadge");
+        const pend = Math.max(0, total - savedCount);
+        pb.textContent =
+          pend > 0 ? `${pend} pendente${pend > 1 ? "s" : ""}` : "✓ Tudo salvo";
+        pb.className = "badge-pend" + (pend === 0 ? " done" : "");
+      }
+    </script>
+  </body>
+</html>
