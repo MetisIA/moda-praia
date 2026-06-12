@@ -557,3 +557,21 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* ============================================================
+   STEPPER FIX — garante que global não seja sobrescrito
+   ============================================================ */
+.step-circle.done {
+  background: var(--grn) !important;
+  color: var(--white) !important;
+  border: none !important;
+}
+
+.step-circle.active {
+  background: var(--pk2) !important;
+  color: var(--white) !important;
+  border: none !important;
+}
+
+.step-line.done {
+  background: var(--grn) !important;
+}

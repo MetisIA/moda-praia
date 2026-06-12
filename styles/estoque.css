@@ -1,63 +1,66 @@
 /* =============================================
-   ESTOQUE.CSS — Estilos específicos da página de Estoque
+   ESTOQUE.CSS — Estilos específicos do Estoque
    ============================================= */
 
-/* --- Stats Grid --- */
+/* ============================================================
+   STATS GRID
+   ============================================================ */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .stat-card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  padding: 18px 20px;
   display: flex;
   align-items: center;
   gap: 14px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
 .stat-icon {
-  width: 46px;
-  height: 46px;
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
   flex-shrink: 0;
 }
 
 .stat-icon.blue {
-  background: #ffd6e7;
+  background: #e3f2fd;
 }
 .stat-icon.green {
   background: #dcfce7;
 }
-.stat-icon.orange {
-  background: #fef3c7;
-}
 .stat-icon.red {
   background: #fee2e2;
 }
+.stat-icon.orange {
+  background: #fff3e0;
+}
 
 .stat-info p {
-  font-size: 0.75rem;
+  margin: 0;
+  font-size: 0.78rem;
   color: var(--text-muted);
-  margin-bottom: 2px;
 }
 
 .stat-info strong {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--text);
-  font-weight: 800;
 }
 
-/* --- Filtros --- */
+/* ============================================================
+   FILTROS
+   ============================================================ */
 .filters-card {
   padding: 16px 20px;
   margin-bottom: 16px;
@@ -70,16 +73,17 @@
   align-items: center;
 }
 
+/* Campo de busca — cresce para preencher espaço disponível */
 .search-input {
   position: relative;
-  flex: 1;
+  flex: 1 1 200px;
   min-width: 160px;
-  max-width: 260px;
+  max-width: 320px;
 }
 
-/* FIX: ícone de busca posicionado corretamente */
 .search-input .form-control {
   padding-left: 34px;
+  width: 100%;
 }
 
 .search-icon {
@@ -92,90 +96,100 @@
   line-height: 1;
 }
 
-.select-categoria {
-  max-width: 160px;
-  flex-shrink: 0;
+/* Select de categoria — tamanho fixo, não cresce nem encolhe */
+.filter-select {
+  flex: 0 0 auto;
+  min-width: 140px;
+  max-width: 180px;
 }
 
-.checkbox-label {
+/* Checkbox "Só zerados" */
+.filter-check {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 0.85rem;
+  color: var(--text-muted);
   cursor: pointer;
   white-space: nowrap;
-  color: var(--text-muted);
+  user-select: none;
 }
 
+/* Grupo de botões de ação — empurrado para a direita automaticamente */
 .filters-actions {
-  margin-left: auto;
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto; /* ✅ empurra para extremidade direita da filters-bar */
 }
 
-/* --- Tabela --- */
+/* ============================================================
+   TABELA
+   ============================================================ */
 .card-table {
   padding: 0;
   overflow: hidden;
-  /* FIX: garante que o card ocupe toda a largura disponível */
-  width: 100%;
 }
 
-.card-table .table-wrap {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  overflow-x: auto; /* scroll horizontal em telas pequenas */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
 }
 
 thead {
-  background: #fff0f6;
+  background: var(--bg, #f8fafc);
+  border-bottom: 2px solid var(--border);
 }
 
-th {
-  padding: 11px 14px;
+thead th {
+  padding: 12px 14px;
   text-align: left;
-  font-weight: 700;
-  color: var(--text-muted);
   font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+tbody tr {
   border-bottom: 1px solid var(--border);
-  white-space: nowrap; /* evita quebra nos headers */
+  transition: background 0.15s ease;
 }
 
-td {
-  padding: 11px 14px;
-  border-bottom: 1px solid #fff0f6;
-  color: var(--text);
-  vertical-align: middle;
-}
-
-tr:last-child td {
+tbody tr:last-child {
   border-bottom: none;
 }
 
-/* FIX: hover apenas nas linhas de dados (não no expander) */
-tbody tr:not(.expander-row):hover td {
-  background: #fff8fb;
+tbody tr:not(.expander-row):hover {
+  background: var(--bg, #f8fafc);
 }
 
+tbody td {
+  padding: 12px 14px;
+  vertical-align: middle;
+  color: var(--text);
+}
+
+/* Colunas de tamanho e total centralizadas */
 .col-center {
   text-align: center;
 }
 
-/* --- Produto na tabela --- */
+/* ============================================================
+   PRODUTO — nome e subtítulo
+   ============================================================ */
 .product-name {
   font-weight: 600;
-  font-size: 0.85rem;
-  white-space: nowrap;
+  font-size: 0.875rem;
+  color: var(--text);
+  margin-bottom: 2px;
 }
 
 .product-sub {
@@ -184,105 +198,130 @@ tbody tr:not(.expander-row):hover td {
 }
 
 .product-code {
-  background: #ffd6e7;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  color: #5a0030;
   font-family: "Courier New", monospace;
-  white-space: nowrap;
+  font-size: 0.78rem;
+  background: var(--bg, #f1f5f9);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--text-muted);
 }
 
-/* --- Linha zerada (danger) --- */
-.row-danger td {
+/* ============================================================
+   LINHA ZERADA — destaque vermelho
+   ============================================================ */
+.row-danger {
   background: #fff5f5;
 }
 
-/* FIX: hover não sobrescreve o fundo danger */
-.row-danger:hover td {
-  background: #ffe8e8 !important;
+.row-danger:hover {
+  background: #fee2e2 !important;
 }
 
+/* Borda esquerda vermelha na primeira célula da linha zerada */
 .cell-danger-border {
-  border-left: 3px solid var(--danger) !important;
+  border-left: 3px solid var(--danger, #dc2626);
 }
 
 .text-danger {
-  color: var(--danger);
+  color: var(--danger, #dc2626);
 }
 
-/* --- Expander --- */
+/* ============================================================
+   EXPANDER ROW — linha de edição inline
+   ============================================================ */
 .expander-row {
-  display: none; /* JS alterna para "table-row" */
+  background: #f8fafc;
 }
 
 .expander-cell {
-  padding: 8px 16px 12px;
-  background: transparent;
-}
-
-/* FIX: expander não pisca no hover da linha */
-.expander-row:hover td {
-  background: transparent !important;
+  padding: 0 !important;
 }
 
 .expander {
-  background: #fff0f6;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 16px;
+  padding: 18px 20px;
+  border-top: 2px solid var(--primary, #6366f1);
+  animation: slideDown 0.18s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .expander-title {
-  font-size: 0.82rem;
-  font-weight: 700;
+  margin: 0 0 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--text);
-  margin-bottom: 12px;
 }
 
+/* Grid de inputs por tamanho */
 .expander-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .expander-size {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 64px;
 }
 
 .expander-size label {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--text-muted);
-  margin-bottom: 4px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.expander-size input {
-  width: 100%;
-  text-align: center;
-  padding: 7px;
-  border: 1.5px solid var(--border);
-  border-radius: 6px;
+.expander-size input[type="number"] {
+  width: 64px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 6px);
   font-size: 0.9rem;
-  font-weight: 700;
-  font-family: inherit;
-  background: var(--white);
+  font-weight: 600;
+  text-align: center;
   color: var(--text);
+  background: var(--surface);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.expander-size input[type="number"]:focus {
   outline: none;
-  transition: border-color 0.2s;
+  border-color: var(--primary, #6366f1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
 }
 
-.expander-size input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
+/* Remove setas nativas do input number */
+.expander-size input[type="number"]::-webkit-inner-spin-button,
+.expander-size input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
+.expander-size input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Botões Salvar / Cancelar */
 .expander-actions {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  align-items: center;
 }
 
 /* ============================================================
@@ -306,13 +345,16 @@ tbody tr:not(.expander-row):hover td {
     padding: 0 !important;
   }
 
-  .stats-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
+  table {
+    font-size: 0.8rem;
   }
 
-  .card {
-    box-shadow: none !important;
-    border: 1px solid #ddd !important;
+  .expander-row {
+    display: none !important;
+  }
+
+  tbody tr {
+    break-inside: avoid;
   }
 }
 
@@ -320,28 +362,45 @@ tbody tr:not(.expander-row):hover td {
    RESPONSIVO
    ============================================================ */
 @media (max-width: 900px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .filters-actions {
+    margin-left: 0; /* em telas médias, não forçar push total */
   }
 }
 
 @media (max-width: 600px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
+  /* Filtros empilhados verticalmente */
   .filters-bar {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .search-input {
+  .search-input,
+  .filter-select,
+  .filter-check,
+  .filters-actions {
     max-width: 100%;
+    width: 100%;
+    margin-left: 0;
   }
 
+  /* Botões de ação alinhados à direita em mobile */
   .filters-actions {
-    margin-left: 0;
-    width: 100%;
-    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  /* Stats menores */
+  .stat-card {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .stat-info strong {
+    font-size: 1.2rem;
+  }
+
+  /* Inputs do expander menores */
+  .expander-size input[type="number"] {
+    width: 54px;
+    font-size: 0.85rem;
   }
 }

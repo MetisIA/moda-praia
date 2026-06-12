@@ -1,839 +1,167 @@
-/* ============================================================
-   MODA PRAIA — Cadastro de Produto
-   Versão 1.0.0 | 2025
-   ============================================================ */
-
-/* ============================================================
-   LAYOUT GERAL DA PÁGINA
-   ============================================================ */
-.app {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* ---------- SIDEBAR LOGO (específico desta página) ---------- */
-.sidebar-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.logo-box {
-  width: 56px;
-  height: 56px;
-  background: var(--pk2);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-
-.sidebar-logo span {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
-
-.sidebar-logo small {
-  font-size: 11px;
-  opacity: 0.65;
-}
-
-/* ---------- SIDEBAR NAV LABEL ---------- */
-.sidebar-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.5;
-  padding: 0 20px;
-  margin-bottom: 6px;
-  align-self: flex-start;
-}
-
-/* ---------- SIDEBAR NAV ITEMS ---------- */
-.sidebar-nav {
-  width: 100%;
-  padding: 0 12px;
-  flex: 1;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: var(--radius);
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  font-size: 13.5px;
-  font-weight: 500;
-  margin-bottom: 2px;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-
-.nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--white);
-}
-
-.nav-item.active {
-  background: var(--pk2);
-  color: var(--white);
-  font-weight: 700;
-}
-
-.nav-step {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.nav-item.active .nav-step {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* ---------- SIDEBAR FOOTER ---------- */
-.sidebar-footer {
-  font-size: 10px;
-  opacity: 0.4;
-  padding-top: 12px;
-}
-
-/* ============================================================
-   TOPBAR (específico desta página)
-   ============================================================ */
-.topbar-left h1 {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--pk1);
-}
-
-.topbar-left p {
-  font-size: 12px;
-  color: var(--txt2);
-  margin-top: 2px;
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-config {
-  padding: 7px 14px;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--brd);
-  background: var(--white);
-  color: var(--txt2);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    border-color 0.2s,
-    color 0.2s;
-}
-
-.btn-config:hover {
-  border-color: var(--pk2);
-  color: var(--pk1);
-}
-
-/* ============================================================
-   STEPPER (específico desta página)
-   ============================================================ */
-.stepper {
-  display: flex;
-  align-items: center;
-  background: var(--white);
-  border-bottom: 1px solid var(--brd);
-  padding: 0 28px;
-}
-
-.step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 20px;
-  font-size: 13px;
-  color: var(--txt2);
-  flex: 1;
-  position: relative;
-}
-
-.step-circle {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--brd);
-  color: var(--txt2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.step.active .step-circle {
-  background: var(--pk2);
-  color: var(--white);
-}
-
-.step.active {
-  color: var(--pk1);
-  font-weight: 600;
-}
-
-.step.inactive {
-  color: var(--txt2);
-}
-
-.step-info {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.3;
-}
-
-.step-info strong {
-  font-size: 13px;
-}
-
-.step-info span {
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-.step-line {
-  flex: 0 0 40px;
-  height: 2px;
-  background: var(--brd);
-}
-
-/* ============================================================
-   CONTENT — DUAS COLUNAS
-   ============================================================ */
-.content {
-  padding: 24px 28px;
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 20px;
-  align-items: start;
-}
-
-/* ============================================================
-   CARD HEADER
-   ============================================================ */
-.card-header {
-  padding-bottom: 14px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--brd);
-}
-
-.card-header h2 {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--pk1);
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* ============================================================
-   FORM SECTIONS
-   ============================================================ */
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.section-title {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--pk1);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.level-badge {
-  font-size: 10px;
-  font-weight: 700;
-  background: var(--pk4);
-  color: var(--pk1);
-  padding: 2px 8px;
-  border-radius: 20px;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-label {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--txt2);
-}
-
-/* ============================================================
-   AUTOCOMPLETE
-   ============================================================ */
-.autocomplete-wrap {
-  position: relative;
-}
-
-.autocomplete-wrap input {
-  width: 100%;
-  padding: 9px 12px;
-  border: 1.5px solid var(--brd);
-  border-radius: var(--radius);
-  font-size: 13.5px;
-  color: var(--txt);
-  background: var(--white);
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-}
-
-.autocomplete-wrap input:focus {
-  border-color: var(--pk2);
-  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
-}
-
-.autocomplete-wrap input::placeholder {
-  color: var(--txt2);
-  opacity: 0.7;
-}
-
-.autocomplete-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  background: var(--white);
-  border: 1.5px solid var(--brd);
-  border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(194, 24, 91, 0.1);
-  z-index: 200;
-  overflow: hidden;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.autocomplete-dropdown.open {
-  display: block;
-}
-
-.ac-item {
-  padding: 9px 14px;
-  font-size: 13.5px;
-  cursor: pointer;
-  color: var(--txt);
-  transition: background 0.15s;
-}
-
-.ac-item:hover {
-  background: var(--pk5);
-}
-
-.ac-item.create {
-  color: var(--pk2);
-  font-weight: 600;
-  border-top: 1px solid var(--brd);
-}
-
-.ac-item.create:hover {
-  background: var(--pk4);
-}
-
-/* ============================================================
-   TAG SELECIONADA
-   ============================================================ */
-.tag-selected {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 12.5px;
-  font-weight: 600;
-  margin-top: 4px;
-}
-
-.tag-selected button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  line-height: 1;
-  opacity: 0.6;
-  padding: 0;
-  transition: opacity 0.2s;
-  color: inherit;
-}
-
-.tag-selected button:hover {
-  opacity: 1;
-}
-
-/* ============================================================
-   INPUT BASE (coleção)
-   ============================================================ */
-.input-base {
-  width: 100%;
-  padding: 9px 12px;
-  border: 1.5px solid var(--brd);
-  border-radius: var(--radius);
-  font-size: 13.5px;
-  color: var(--txt);
-  background: var(--white);
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-}
-
-.input-base:focus {
-  border-color: var(--pk2);
-  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
-}
-
-/* ============================================================
-   GRADE DE TAMANHOS
-   ============================================================ */
-.grade-btns {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.grade-btn {
-  min-width: 48px;
-  padding: 8px 14px;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--brd);
-  background: var(--white);
-  color: var(--txt2);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.grade-btn:hover {
-  border-color: var(--pk3);
-  color: var(--pk1);
-}
-
-.grade-btn.active {
-  background: var(--pk2);
-  border-color: var(--pk2);
-  color: var(--white);
-}
-
-/* ============================================================
-   ESTOQUE POR TAMANHO
-   ============================================================ */
-.estoque-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 10px;
-}
-
-.estoque-item {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.estoque-item label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--pk1);
-  text-align: center;
-}
-
-.estoque-item input {
-  width: 100%;
-  padding: 8px;
-  border: 1.5px solid var(--brd);
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  color: var(--txt);
-  background: var(--white);
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-}
-
-.estoque-item input:focus {
-  border-color: var(--pk2);
-  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
-}
-
-/* ============================================================
-   SKU PREVIEW
-   ============================================================ */
-.sku-preview {
-  background: var(--pk4);
-  border: 1.5px dashed var(--pk3);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  transition: opacity 0.3s;
-}
-
-.sku-preview label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--pk1);
-  margin-bottom: 4px;
-  display: block;
-}
-
-.sku-value {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--pk1);
-  letter-spacing: 1.5px;
-  font-family: "Courier New", monospace;
-}
-
-/* ============================================================
-   BTN PRIMARY (full width no form)
-   ============================================================ */
-.btn-primary {
-  width: 100%;
-  justify-content: center;
-  padding: 12px;
-  font-size: 14px;
-}
-
-/* ============================================================
-   TABLE TOOLBAR
-   ============================================================ */
-.table-toolbar {
-  display: flex;
-  gap: 10px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--brd);
-  align-items: center;
-}
-
-.search-input {
-  flex: 1;
-  padding: 8px 12px;
-  border: 1.5px solid var(--brd);
-  border-radius: var(--radius);
-  font-size: 13px;
-  color: var(--txt);
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.search-input:focus {
-  border-color: var(--pk2);
-}
-
-.select-filter {
-  padding: 8px 12px;
-  border: 1.5px solid var(--brd);
-  border-radius: var(--radius);
-  font-size: 13px;
-  color: var(--txt);
-  background: var(--white);
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.select-filter:focus {
-  border-color: var(--pk2);
-}
-
-/* ============================================================
-   INFO BANNER
-   ============================================================ */
-.info-banner {
-  background: var(--blu2);
-  color: var(--blu);
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-bottom: 1px solid #c3d9f5;
-}
-
-/* ============================================================
-   CHIPS (tabela)
-   ============================================================ */
-.chip {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11.5px;
-  font-weight: 700;
-}
-
-.chip-pink {
-  background: var(--pk4);
-  color: var(--pk1);
-}
-.chip-mauve {
-  background: #f3e5f5;
-  color: #6a1b9a;
-}
-.chip-blue {
-  background: var(--blu2);
-  color: var(--blu);
-}
-.chip-green {
-  background: var(--grn2);
-  color: var(--grn);
-}
-.chip-red {
-  background: var(--red2);
-  color: var(--red);
-}
-
-/* ============================================================
-   ACTION BUTTONS (tabela)
-   ============================================================ */
-.action-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  padding: 4px 6px;
-  border-radius: 6px;
-  transition: background 0.15s;
-}
-
-.action-btn:hover {
-  background: var(--pk4);
-}
-
-/* ============================================================
-   PAGINAÇÃO
-   ============================================================ */
-.pagination {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 20px;
-  border-top: 1px solid var(--brd);
-}
-
-.page-info {
-  font-size: 12px;
-  color: var(--txt2);
-  flex: 1;
-}
-
-.page-btn {
-  padding: 6px 12px;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--brd);
-  background: var(--white);
-  color: var(--txt2);
-  font-size: 12.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.page-btn:hover {
-  border-color: var(--pk3);
-  color: var(--pk1);
-}
-
-.page-btn.current {
-  background: var(--pk2);
-  border-color: var(--pk2);
-  color: var(--white);
-}
-
-/* ============================================================
-   MODAIS
-   ============================================================ */
-.modal-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 500;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-backdrop.open {
-  display: flex;
-}
-
-.modal {
-  background: var(--white);
-  border-radius: 14px;
-  padding: 28px;
-  width: 100%;
-  max-width: 460px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
-  animation: modalIn 0.2s ease;
-}
-
-@keyframes modalIn {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--pk1);
-  margin-bottom: 18px;
-}
-
-/* ---------- CONFIRM GRID ---------- */
-.confirm-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.confirm-item {
-  background: var(--pk5);
-  border: 1px solid var(--brd);
-  border-radius: var(--radius);
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.confirm-item label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--txt2);
-}
-
-.confirm-item span {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--txt);
-}
-
-.confirm-sku {
-  grid-column: 1 / -1;
-  background: var(--pk4);
-  border-color: var(--pk3);
-}
-
-.confirm-sku span {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--pk1);
-  font-family: "Courier New", monospace;
-  letter-spacing: 1px;
-}
-
-.confirm-estoque {
-  grid-column: 1 / -1;
-}
-
-/* ---------- MODAL ACTIONS ---------- */
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--txt2);
-  border: 1.5px solid var(--brd);
-}
-
-.btn-ghost:hover {
-  border-color: var(--pk3);
-  color: var(--pk1);
-}
-
-.btn-sm {
-  padding: 8px 16px;
-  font-size: 13px;
-}
-
-.btn-danger {
-  background: var(--red2);
-  color: var(--red);
-}
-
-/* ============================================================
-   RESPONSIVO
-   ============================================================ */
-@media (max-width: 1024px) {
-  .content {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-
-  .main {
-    margin-left: 0;
-  }
-
-  .topbar {
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .stepper {
-    padding: 0 12px;
-    overflow-x: auto;
-  }
-
-  .content {
-    padding: 16px;
-  }
-
-  .metrics {
-    grid-template-columns: 1fr 1fr;
-  }
-}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moda Praia — Cadastro de Produto</title>
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/cadastro.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <span class="icon">🏖️</span>
+          <h1>Moda Praia</h1>
+          <span>Sistema de Gestão</span>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-section">Etapas</div>
+          <a class="nav-item active" href="cadastro.html">
+            <div class="step-badge">1</div>
+            Cadastro de Produto
+          </a>
+          <a class="nav-item" href="upload.html">
+            <div class="step-badge">2</div>
+            Upload de Imagens
+          </a>
+          <a class="nav-item" href="mosaico.html">
+            <div class="step-badge">3</div>
+            Mosaico de Fotos
+          </a>
+          <a class="nav-item" href="estoque.html">
+            <div class="step-badge">4</div>
+            Estoque
+          </a>
+        </nav>
+        <div class="sidebar-footer">v1.0.0 · 2025</div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h2>Etapa 1 — Cadastro de Produto</h2>
+            <p>Preencha os dados do produto para iniciar o fluxo</p>
+          </div>
+          <div class="topbar-right">
+            <span class="badge badge-success">✓ Sistema Online</span>
+            <button class="btn btn-ghost btn-sm">⚙️ Config</button>
+          </div>
+        </div>
+
+        <!-- Step Progress Bar -->
+        <div class="step-progress">
+          <div class="step-item">
+            <div class="step-circle active">1</div>
+            <div class="step-label">
+              <p>Cadastro</p>
+              <span>Produto</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">2</div>
+            <div class="step-label">
+              <p>Upload</p>
+              <span>Imagens</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">3</div>
+            <div class="step-label">
+              <p>Mosaico</p>
+              <span>Visualização</span>
+            </div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">4</div>
+            <div class="step-label">
+              <p>Estoque</p>
+              <span>Gestão</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen">
+          <div class="card">
+            <div class="card-header">
+              <h3>📋 Dados do Produto</h3>
+              <span>Preencha todas as informações obrigatórias</span>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Nome do Produto *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ex: Biquíni Floral Rosa"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Código *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ex: BIQ-001"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Categoria *</label>
+                  <select class="form-control">
+                    <option value="">Selecione...</option>
+                    <option>Biquíni</option>
+                    <option>Maiô</option>
+                    <option>Bermuda</option>
+                    <option>Canga</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Estampa</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ex: Floral, Listrado, Tie-Dye..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preço de Custo</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="R$ 0,00"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preço de Venda</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="R$ 0,00"
+                  />
+                </div>
+                <div class="form-group form-group--full">
+                  <label class="form-label">Descrição</label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="Descrição detalhada do produto..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-ghost">🗑️ Limpar</button>
+                <a href="upload.html" class="btn btn-primary">
+                  Próximo: Upload de Imagens →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

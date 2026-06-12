@@ -9,6 +9,7 @@
   </head>
   <body>
     <div class="app">
+      <!-- ===================== SIDEBAR ===================== -->
       <aside class="sidebar">
         <div class="sidebar-logo">
           <span class="icon">🏖️</span>
@@ -17,27 +18,29 @@
         </div>
         <nav class="sidebar-nav">
           <div class="nav-section">Etapas</div>
-          <a class="nav-item" href="cadastro.html"
-            ><div class="step-badge">1</div>
-            Cadastro de Produto</a
-          >
-          <a class="nav-item" href="upload.html"
-            ><div class="step-badge">2</div>
-            Upload de Imagens</a
-          >
-          <a class="nav-item" href="mosaico.html"
-            ><div class="step-badge">3</div>
-            Mosaico de Fotos</a
-          >
-          <a class="nav-item active" href="estoque.html"
-            ><div class="step-badge">4</div>
-            Estoque</a
-          >
+          <a class="nav-item" href="cadastro.html">
+            <div class="step-badge">1</div>
+            Cadastro de Produto
+          </a>
+          <a class="nav-item" href="upload.html">
+            <div class="step-badge">2</div>
+            Upload de Imagens
+          </a>
+          <a class="nav-item" href="mosaico.html">
+            <div class="step-badge">3</div>
+            Mosaico de Fotos
+          </a>
+          <a class="nav-item active" href="estoque.html">
+            <div class="step-badge">4</div>
+            Estoque
+          </a>
         </nav>
         <div class="sidebar-footer">v1.0.0 · 2025</div>
       </aside>
 
+      <!-- ===================== MAIN ===================== -->
       <main class="main">
+        <!-- TOPBAR -->
         <div class="topbar">
           <div class="topbar-left">
             <h2>Etapa 4 — Estoque</h2>
@@ -49,6 +52,7 @@
           </div>
         </div>
 
+        <!-- STEP PROGRESS -->
         <div class="step-progress">
           <div class="step-item">
             <div class="step-circle done">✓</div>
@@ -84,6 +88,7 @@
         </div>
 
         <div class="screen">
+          <!-- STATS -->
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-icon blue">📦</div>
@@ -115,6 +120,8 @@
             </div>
           </div>
 
+          <!-- FILTROS -->
+          <!-- ✅ Fix #3 e #4: select com form-control, filters-actions alinhado -->
           <div class="card filters-card">
             <div class="filters-bar">
               <div class="search-input">
@@ -125,15 +132,20 @@
                   placeholder="Buscar produto..."
                 />
               </div>
-              <select class="form-control select-categoria">
+
+              <select class="form-control filter-select">
                 <option>Todas categorias</option>
                 <option>Biquíni</option>
                 <option>Maiô</option>
                 <option>Bermuda</option>
               </select>
-              <label class="checkbox-label">
+
+              <!-- ✅ Fix #6: classe corrigida para filter-check -->
+              <label class="filter-check">
                 <input type="checkbox" /> Só zerados
               </label>
+
+              <!-- ✅ Fix #4: filters-actions agora com flex gap -->
               <div class="filters-actions">
                 <button class="btn btn-outline btn-sm">📥 CSV</button>
                 <button class="btn btn-outline btn-sm">📄 JSON</button>
@@ -144,6 +156,7 @@
             </div>
           </div>
 
+          <!-- TABELA -->
           <div class="card card-table">
             <div class="table-wrap">
               <table>
@@ -163,7 +176,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- BIQ-001 -->
+                  <!-- ==================== BIQ-001 ==================== -->
                   <tr>
                     <td>
                       <div class="product-name">Floral Rosa</div>
@@ -179,15 +192,17 @@
                     <td class="col-center">0</td>
                     <td class="col-center"><strong>11</strong></td>
                     <td class="col-center">
+                      <!-- ✅ Fix #2: data-target no botão, sem onclick inline -->
                       <button
-                        class="btn btn-ghost btn-xs"
-                        onclick="toggleExpander('exp1')"
+                        class="btn btn-ghost btn-xs btn-editar"
+                        data-target="exp1"
                       >
                         ✏️ Editar
                       </button>
                     </td>
                   </tr>
-                  <tr id="exp1" class="expander-row">
+                  <!-- ✅ Fix #1: hidden por padrão via atributo hidden -->
+                  <tr id="exp1" class="expander-row" hidden>
                     <td colspan="11" class="expander-cell">
                       <div class="expander">
                         <p class="expander-title">
@@ -224,8 +239,8 @@
                             💾 Salvar
                           </button>
                           <button
-                            class="btn btn-ghost btn-sm"
-                            onclick="toggleExpander('exp1')"
+                            class="btn btn-ghost btn-sm btn-cancelar"
+                            data-target="exp1"
                           >
                             ✕ Cancelar
                           </button>
@@ -234,7 +249,7 @@
                     </td>
                   </tr>
 
-                  <!-- BIQ-002 -->
+                  <!-- ==================== BIQ-002 ==================== -->
                   <tr>
                     <td>
                       <div class="product-name">Listrado Azul</div>
@@ -251,14 +266,14 @@
                     <td class="col-center"><strong>17</strong></td>
                     <td class="col-center">
                       <button
-                        class="btn btn-ghost btn-xs"
-                        onclick="toggleExpander('exp2')"
+                        class="btn btn-ghost btn-xs btn-editar"
+                        data-target="exp2"
                       >
                         ✏️ Editar
                       </button>
                     </td>
                   </tr>
-                  <tr id="exp2" class="expander-row">
+                  <tr id="exp2" class="expander-row" hidden>
                     <td colspan="11" class="expander-cell">
                       <div class="expander">
                         <p class="expander-title">
@@ -295,8 +310,8 @@
                             💾 Salvar
                           </button>
                           <button
-                            class="btn btn-ghost btn-sm"
-                            onclick="toggleExpander('exp2')"
+                            class="btn btn-ghost btn-sm btn-cancelar"
+                            data-target="exp2"
                           >
                             ✕ Cancelar
                           </button>
@@ -305,7 +320,7 @@
                     </td>
                   </tr>
 
-                  <!-- MAI-001 -->
+                  <!-- ==================== MAI-001 ==================== -->
                   <tr>
                     <td>
                       <div class="product-name">Tie-Dye Verde</div>
@@ -322,14 +337,14 @@
                     <td class="col-center"><strong>18</strong></td>
                     <td class="col-center">
                       <button
-                        class="btn btn-ghost btn-xs"
-                        onclick="toggleExpander('exp3')"
+                        class="btn btn-ghost btn-xs btn-editar"
+                        data-target="exp3"
                       >
                         ✏️ Editar
                       </button>
                     </td>
                   </tr>
-                  <tr id="exp3" class="expander-row">
+                  <tr id="exp3" class="expander-row" hidden>
                     <td colspan="11" class="expander-cell">
                       <div class="expander">
                         <p class="expander-title">
@@ -366,8 +381,8 @@
                             💾 Salvar
                           </button>
                           <button
-                            class="btn btn-ghost btn-sm"
-                            onclick="toggleExpander('exp3')"
+                            class="btn btn-ghost btn-sm btn-cancelar"
+                            data-target="exp3"
                           >
                             ✕ Cancelar
                           </button>
@@ -376,7 +391,7 @@
                     </td>
                   </tr>
 
-                  <!-- BER-001 -->
+                  <!-- ==================== BER-001 ==================== -->
                   <tr>
                     <td>
                       <div class="product-name">Ondas Coral</div>
@@ -393,14 +408,14 @@
                     <td class="col-center"><strong>14</strong></td>
                     <td class="col-center">
                       <button
-                        class="btn btn-ghost btn-xs"
-                        onclick="toggleExpander('exp4')"
+                        class="btn btn-ghost btn-xs btn-editar"
+                        data-target="exp4"
                       >
                         ✏️ Editar
                       </button>
                     </td>
                   </tr>
-                  <tr id="exp4" class="expander-row">
+                  <tr id="exp4" class="expander-row" hidden>
                     <td colspan="11" class="expander-cell">
                       <div class="expander">
                         <p class="expander-title">
@@ -429,8 +444,8 @@
                             💾 Salvar
                           </button>
                           <button
-                            class="btn btn-ghost btn-sm"
-                            onclick="toggleExpander('exp4')"
+                            class="btn btn-ghost btn-sm btn-cancelar"
+                            data-target="exp4"
                           >
                             ✕ Cancelar
                           </button>
@@ -439,7 +454,7 @@
                     </td>
                   </tr>
 
-                  <!-- MAI-002 — Zerado -->
+                  <!-- ==================== MAI-002 (ZERADO) ==================== -->
                   <tr class="row-danger">
                     <td class="cell-danger-border">
                       <div class="product-name">Xadrez Preto</div>
@@ -458,14 +473,15 @@
                     </td>
                     <td class="col-center">
                       <button
-                        class="btn btn-ghost btn-xs"
-                        onclick="toggleExpander('exp5')"
+                        class="btn btn-ghost btn-xs btn-editar"
+                        data-target="exp5"
                       >
                         ✏️ Editar
                       </button>
                     </td>
                   </tr>
-                  <tr id="exp5" class="expander-row">
+                  <!-- ✅ Fix #5: expander do zerado também oculto por padrão -->
+                  <tr id="exp5" class="expander-row" hidden>
                     <td colspan="11" class="expander-cell">
                       <div class="expander">
                         <p class="expander-title">
@@ -502,8 +518,8 @@
                             💾 Salvar
                           </button>
                           <button
-                            class="btn btn-ghost btn-sm"
-                            onclick="toggleExpander('exp5')"
+                            class="btn btn-ghost btn-sm btn-cancelar"
+                            data-target="exp5"
                           >
                             ✕ Cancelar
                           </button>
@@ -520,11 +536,37 @@
       </main>
     </div>
 
+    <!-- ===================== SCRIPT ===================== -->
     <script>
-      function toggleExpander(id) {
-        const row = document.getElementById(id);
-        row.style.display = row.style.display === "none" ? "table-row" : "none";
-      }
+      /**
+       * ✅ Fix #1 + #2 — Usa o atributo `hidden` nativo do HTML
+       * em vez de manipular display inline (mais confiável e semântico).
+       *
+       * Delegação de eventos no tbody — sem onclick espalhado no HTML.
+       */
+      document.querySelector("tbody").addEventListener("click", (e) => {
+        // Botão Editar
+        const btnEditar = e.target.closest(".btn-editar");
+        if (btnEditar) {
+          const target = document.getElementById(btnEditar.dataset.target);
+          if (!target) return;
+
+          // ✅ Fecha todos os outros expanders antes de abrir o novo
+          document.querySelectorAll(".expander-row").forEach((row) => {
+            if (row !== target) row.hidden = true;
+          });
+
+          target.hidden = !target.hidden;
+          return;
+        }
+
+        // Botão Cancelar
+        const btnCancelar = e.target.closest(".btn-cancelar");
+        if (btnCancelar) {
+          const target = document.getElementById(btnCancelar.dataset.target);
+          if (target) target.hidden = true;
+        }
+      });
     </script>
   </body>
 </html>
